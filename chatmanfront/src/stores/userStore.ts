@@ -11,7 +11,6 @@ export const UserStore = defineStore({
   }),
   getters: {
     userName: (state) => {
-
       if (state.loggedInUser) return state.loggedInUser.name;
       return "";
     },
@@ -23,19 +22,26 @@ export const UserStore = defineStore({
     createUser(name: string, email: string, password: string) {
       userService
         .createUser(name, email, password)
-        .then((user) => {this.loggedInUser = user})
+        .then((user) => {
+          this.loggedInUser = user;
+        })
         .catch((err) => console.log(err));
     },
-    logOut(){
+    logOut() {
       this.loggedInUser = undefined;
     },
     loginUser(username: string, password: string) {
+      userService
+        .loginUser(username, password)
+        .then((user) => {
+          this.loggedInUser = user;
+        })
+        .catch((err) => console.log(err));
       this.loggedInUser = {
         username: username,
         password: password,
-        uuid: '5f144613-fc1b-4ee0-98e7-a171b7c94b2d',
-        name: 'thyr'
-
+        uuid: "5f144613-fc1b-4ee0-98e7-a171b7c94b2d",
+        name: "",
       };
       /*
       userService
@@ -43,6 +49,6 @@ export const UserStore = defineStore({
         .then((user) => {this.loggedInUser = user})
         .catch((err) => console.log(err))
        */
-    }
+    },
   },
 });

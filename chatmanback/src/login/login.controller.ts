@@ -13,6 +13,7 @@ import { LoginDto } from './dto/login.dto';
 import { RegistrationDto } from './dto/registration.dto';
 import { UserAndTokenDTO } from './dto/userAndTokenDTO';
 import { LocalAuthGuard } from './local-auth.guard';
+import { userEntity } from "../core/entities/user.entity";
 
 @Controller('auth')
 export class LoginController {
