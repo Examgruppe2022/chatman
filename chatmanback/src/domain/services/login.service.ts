@@ -38,17 +38,6 @@ export class LoginService {
     );
   }
 
-  //generates a random string to be used as a salt. the salt will be 10 letters long
-  generateSalt() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    const charactersLength = characters.length;
-    let result = 'A';
-    for (let i = 0; i < 10; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
   //this method hashes a password using a salt, it is used when creating an account and logging in
   async hashPassword(password: string, salt: string): Promise<string> {
     return await bcrypt.hash(password, salt);

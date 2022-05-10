@@ -1,0 +1,19 @@
+﻿version: "3.9"
+
+services:
+    
+  web:
+    build:
+      context: "chatmanfront"
+    image: "localhost:7002/chatman_web:${IMAGE_TAG}"
+    container_name: "${WEB_CONT_NAME}"
+    ports:
+      - "${WEB_PORT}:80"
+
+  api:
+    build:
+      context: "chatmanback"
+    image: "localhost:7002/chatman_api:${IMAGE_TAG}"
+    container_name: "${API_CONT_NAME}"
+    ports:
+      - "${API_PORT}:80"
