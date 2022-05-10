@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { LoginDto } from '../../login/dto/login.dto';
+import { LoginDto } from '../../loginAndUser/dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
-import { RegistrationDto } from '../../login/dto/registration.dto';
+import { RegistrationDto } from '../../loginAndUser/dto/registration.dto';
 import { userEntity } from '../../core/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 

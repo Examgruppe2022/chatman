@@ -27,7 +27,7 @@ export class LoginController {
   }
   /*
   @Post()
-  async login(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
+  async loginAndUser(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
     const user = await this.loginService.validateUser(loginDTO);
     const uatdto = new UserAndTokenDTO();
     uatdto.loginUser = user;
@@ -35,8 +35,8 @@ export class LoginController {
     return uatdto;
   }
 
-    @Post('/login')
-    login(@Body() loginDTO: LoginDto) {
+    @Post('/loginAndUser')
+    loginAndUser(@Body() loginDTO: LoginDto) {
       return this.loginService.validateUser(loginDTO);
     }
     */

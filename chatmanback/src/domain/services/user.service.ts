@@ -1,9 +1,15 @@
-import { IUserRepository } from '../interfaces/IUserRepository';
+import { userEntity } from '../../core/entities/user.entity';
+import { Inject } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { JwtService } from '@nestjs/jwt';
 
 export class UserService {
-  private userRepo: IUserRepository;
+  constructor(
+    @Inject('USER_MODEL') private readonly userModel: Model<userEntity>,
+    private jwtService: JwtService,
+  ) {}
 
-  constructor(userRepository: IUserRepository) {
-    this.userRepo = userRepository;
+  async getAllFromInput() {
+    return this.userModel.find();
   }
 }

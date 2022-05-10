@@ -6,7 +6,8 @@ import { userProvider } from '../infrastructure/mongoDB/userProvider';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { jwtConstants } from './constans';
+
 @Module({
   imports: [
     MongoDbModule,
