@@ -20,7 +20,7 @@ export class RoomsController {
     return this.roomsService.create(createRoomDto);
   }
 
-  @Get()
+  @Post()
   findAll() {
     return this.roomsService.findAll();
   }
