@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export class roomEntity extends Document {
+export class RoomEntity extends Document {
   readonly roomName: string;
   readonly roomCreator: string;
 }

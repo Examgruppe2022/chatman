@@ -10,33 +10,34 @@ import {
 import { RoomsService } from '../domain/services/rooms.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
+import { StringDto } from '../universalDtos/string.dto';
 
 @Controller('rooms')
 export class RoomsController {
   constructor(private readonly roomsService: RoomsService) {}
 
-  @Post()
+  @Post('createRoom')
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomsService.create(createRoomDto);
   }
 
-  @Post()
-  findAll() {
-    return this.roomsService.findAll();
+  @Post('ownRoom')
+  findUsersOwnRooms(@Body() username: StringDto) {
+    return this.roomsService.findUsersOwnRooms(username.text);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.roomsService.findOne(+id);
+  @Post('allAccessibleRooms')
+  findallAccessibleRooms(@Body() username: StringDto) {
+    return this.roomsService.findAllAccessibleRooms(username.text);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoomDto: UpdateRoomDto) {
-    return this.roomsService.update(+id, updateRoomDto);
+  @Post('friendsRooms')
+  findFriendsRooms(@Body() username: StringDto) {
+    return this.roomsService.findFriendsRooms(username.text);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.roomsService.remove(+id);
+  @Post('delete')
+  remove(@Body() roomName: StringDto) {
+    return this.roomsService.remove(roomName.text);
   }
 }
