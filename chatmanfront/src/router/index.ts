@@ -5,6 +5,7 @@ import ChatView from "../views/ChatView.vue";
 import FriendView from "../views/FriendView.vue";
 import CreateUserView from "../views/CreateUserView.vue";
 import ConnectChatView from "../views/ConnectChatView.vue";
+import CreateChatView from "../views/CreateChatView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       name: "chatroom",
       component: ConnectChatView,
     },
+    {
+      path: "/createchat",
+      name: "createChat",
+      component: CreateChatView,
+    }
   ],
 });
 

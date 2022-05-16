@@ -11,12 +11,12 @@ import Toolbar from "primevue/toolbar";
 import SplitButton from "primevue/splitbutton";
 import Listbox from "primevue/listbox";
 import BadgeDirective from "primevue/badgedirective";
+import Splitter from "primevue/splitter";
+import SplitterPanel from "primevue/splitterpanel";
 
-import 'primevue/resources/themes/saga-blue/theme.css'       //theme
-import 'primevue/resources/primevue.min.css'                 //core css
-import 'primeicons/primeicons.css'
-
-
+import "primevue/resources/themes/saga-blue/theme.css"; //theme
+import "primevue/resources/primevue.min.css"; //core css
+import "primeicons/primeicons.css";
 
 const app = createApp(App);
 
@@ -31,6 +31,7 @@ app.component(`Toolbar`, Toolbar);
 app.component(`SplitButton`, SplitButton);
 app.component(`Listbox`, Listbox);
 app.directive(`badge`, BadgeDirective);
-
+app.component(`Splitter`, Splitter);
+app.component(`SplitterPanel`, SplitterPanel);
 
 app.mount("#app");

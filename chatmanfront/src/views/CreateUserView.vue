@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
-import router from "@/router";
+
 
 const userStore = UserStore();
 const inputUsername = ref("");

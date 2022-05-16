@@ -1,14 +1,7 @@
 <template>
-  <div class="top-man">
-    <h1>Chat Room</h1>
-    <br/>
-    <h5>Enter Room Name</h5>
-    <InputText v-model="roomListener" placeholder="Enter room name" />
-    <br/>
-    <Button class="p-button-rounded p-button-secondary " @click="ListenToRoom">Connect</Button>
-  </div>
+
   <div class="left-man">
-    <div class="center_man">
+    <div class="top-man">
   <br />
   <h3>Send a Message</h3>
   <InputText v-model="txtChatInput" placeholder="Enter message" />
@@ -18,12 +11,37 @@
   <br />
   </div>
     </div>
+  <ul>
+    <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
+      {{ chat.sender }} : {{ chat.text }}
+    </li>
+  </ul>
 </template>
 
-<script>
-export default {
-  name: "ChatView.vue",
-};
+<script setup lang="ts">
+import { ChatStore } from "@/stores/chatStore";
+import { UserStore } from "@/stores/userStore";
+import { ref } from "vue";
+
+const chatStore = ChatStore();
+const userStore = UserStore();
+const txtChatInput = ref("");
+const roomChatInput = ref("");
+const roomListener = ref("");
+const loggedInUserName = userStore.userName;
+
+function ListenToRoom() {
+  chatStore.setRoom(roomListener.value);
+}
+
+function sendChat() {
+  chatStore.createChat( {
+    text: txtChatInput.value,
+    room: roomChatInput.value,
+    sender: loggedInUserName
+  });
+}
+
 </script>
 
 <style>
