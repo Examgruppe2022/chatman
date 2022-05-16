@@ -1,6 +1,6 @@
 import { Connection } from 'mongoose';
 import { RoomSchema } from './roomSchema';
-export const userProvider = [
+export const roomProvider = [
   {
     provide: 'ROOM_MODEL',
     useFactory: (connection: Connection) =>

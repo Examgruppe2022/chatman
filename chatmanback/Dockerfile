@@ -1,7 +1,7 @@
 FROM pete9991/chatmanbackend
 
-COPY dist/ App/
+COPY dist/ .
 
-WORKDIR /App
+#WORKDIR /App/App
 
 CMD ["node", "main"]
