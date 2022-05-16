@@ -1,0 +1,7 @@
+FROM node:18-alpine
+
+COPY ../package*.json App/
+
+WORKDIR /App
+
+RUN npm install --only=production
