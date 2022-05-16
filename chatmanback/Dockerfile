@@ -1,10 +1,7 @@
-FROM node:18-alpine
+FROM pete9991/chatmanbackend
 
-COPY package*.json App/
-COPY dist/ App/
+COPY dist/ .
 
-WORKDIR /App
-
-RUN npm install
+#WORKDIR /App/App
 
 CMD ["node", "main"]
