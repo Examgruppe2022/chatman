@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { RegistrationDto } from '../../loginAndUser/dto/registration.dto';
 import { userEntity } from '../../core/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
+import { UserAndTokenDTO } from '../../loginAndUser/dto/userAndTokenDTO';
 
 @Injectable()
 export class LoginService {
@@ -66,5 +67,13 @@ export class LoginService {
         username: loginDTO.username,
       })
       .exec();
+  }
+
+  async attachToken(logindto: LoginDto): Promise<UserAndTokenDTO> {
+    const token = await this.validateUser(logindto);
+    let utDTO: UserAndTokenDTO;
+    utDTO.token = token;
+    utDTO.loginUser = logindto;
+    return utDTO;
   }
 }

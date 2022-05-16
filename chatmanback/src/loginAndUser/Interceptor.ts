@@ -1,12 +1,9 @@
 import { UserAndTokenDTO } from './dto/userAndTokenDTO';
 import { LoginDto } from './dto/login.dto';
 import { LoginService } from '../domain/services/login.service';
+import { Injectable } from '@nestjs/common';
 
 export class Interceptor {
-
-  detachToken() {}
-
-
   constructor(private readonly logServ: LoginService) {}
 
   async attachToken(logindto: LoginDto): Promise<UserAndTokenDTO> {
@@ -16,4 +13,6 @@ export class Interceptor {
     utDTO.loginUser = logindto;
     return utDTO;
   }
+
+  detachToken() {}
 }
