@@ -14,10 +14,11 @@ import { RegistrationDto } from './dto/registration.dto';
 import { UserAndTokenDTO } from './dto/userAndTokenDTO';
 import { LocalAuthGuard } from './local-auth.guard';
 import { userEntity } from "../core/entities/user.entity";
+import { Interceptor } from "../loginAndUser/Interceptor";
 
 @Controller('auth')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(private readonly loginService: LoginService, private readonly interceptor: Interceptor) {}
 
   @Post('/register')
   async create(@Body() registerDTO: RegistrationDto) {
@@ -43,6 +44,7 @@ export class LoginController {
 
   @Post('login')
   async login(@Body() loginDTO: LoginDto) {
-    return this.loginService.validateUser(loginDTO);
+    return this.interceptor.attachToken(loginDTO)
+    //return this.loginService.validateUser(loginDTO);
   }
 }

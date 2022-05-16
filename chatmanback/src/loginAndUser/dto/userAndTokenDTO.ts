@@ -6,5 +6,5 @@ export class UserAndTokenDTO {
   @ApiProperty()
   loginUser: LoginDto;
   @ApiProperty()
-  token: string;
+  token: { access_token: string };
 }
