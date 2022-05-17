@@ -1,4 +1,4 @@
-import { FriendRequest } from '../../core/entities/friend-request.entity';
+import { FriendRequestEntity } from '../../core/entities/friend-request.entity';
 import mongoose from "mongoose";
 
 export const FriendRequestSchema = new mongoose.Schema({
