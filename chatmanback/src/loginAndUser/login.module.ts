@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constans';
+import { Interceptor } from './Interceptor';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { jwtConstants } from './constans';
     }),
   ],
   controllers: [LoginController],
-  providers: [LoginService, ...userProvider, LocalStrategy],
-  exports: [LoginService],
+  providers: [LoginService, ...userProvider, LocalStrategy, Interceptor],
+  exports: [LoginService, Interceptor],
 })
 export class LoginModule {}

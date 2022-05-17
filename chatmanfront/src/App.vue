@@ -22,7 +22,7 @@ export default {
         label: "Create chat",
         icon: "pi pi-plus",
         command: () => {
-          window.location.href = "CreateChatView";
+          window.location.href = "/createchat";
         },
       },
       {

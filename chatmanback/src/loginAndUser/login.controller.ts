@@ -13,11 +13,16 @@ import { LoginDto } from './dto/login.dto';
 import { RegistrationDto } from './dto/registration.dto';
 import { UserAndTokenDTO } from './dto/userAndTokenDTO';
 import { LocalAuthGuard } from './local-auth.guard';
-import { userEntity } from "../core/entities/user.entity";
+import { userEntity } from '../core/entities/user.entity';
+import { Interceptor } from '../loginAndUser/Interceptor';
+import { promises } from 'dns';
 
 @Controller('auth')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(
+    private readonly loginService: LoginService,
+    private readonly interceptor: Interceptor,
+  ) {}
 
   @Post('/register')
   async create(@Body() registerDTO: RegistrationDto) {
@@ -42,7 +47,12 @@ export class LoginController {
     */
 
   @Post('login')
-  async login(@Body() loginDTO: LoginDto) {
-    return this.loginService.validateUser(loginDTO);
+  async login(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
+    const tokenToAdd = await this.loginService.validateUser(loginDTO);
+    const user = loginDTO;
+    const utDTO = new UserAndTokenDTO();
+    utDTO.loginUser = user;
+    utDTO.token = tokenToAdd;
+    return utDTO;
   }
 }
