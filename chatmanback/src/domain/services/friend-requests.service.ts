@@ -1,41 +1,32 @@
 import { UpdateFriendRequestDto } from '../../friend-requests/dto/update-friend-requests.dto';
-import { IFriendRequestRepository } from '../interfaces/friend-requestRepository.interface';
 import { FriendRequest } from '../../core/entities/friend-request.entity';
+import { Inject, Injectable } from "@nestjs/common";
+import { Model } from "mongoose";
+import { UserEntity } from "../../core/entities/User.Entity";
+import { CreateFriendRequestDto } from "../../friend-requests/dto/create-friend-requests.dto";
 
+@Injectable()
 export class FriendRequestsService {
-  private friendRequestRepo: IFriendRequestRepository;
+  constructor(
+    @Inject('FRIENDREQUEST_MODEL') private readonly friendRequestModel: Model<FriendRequest>,
+    @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
+  ) {}
 
-  constructor(friendRequestRepository: IFriendRequestRepository) {
-    this.friendRequestRepo = friendRequestRepository;
+  create(request: CreateFriendRequestDto){
+    console.log(request);
+    const newRequest = new this.friendRequestModel({
+      senderUsername: request.senderUsername,
+      receiverUsername: request.receiverUsername,
+      isAccepted: false
+    })
+    return newRequest.save();
   }
 
-  create(
-    sentUserUuid: string,
-    sentUserName: string,
-    receivedUserUuid: string,
-    isAccepted: boolean,
-  ): Promise<FriendRequest> {
-    return this.friendRequestRepo.create(
-      sentUserUuid,
-      sentUserName,
-      receivedUserUuid,
-      isAccepted,
-    );
+  async getAllMyFriendRequests(username: String) {
+
   }
 
   findAll() {
     return `This action returns all friendRequests`;
-  }
-
-  getFriendRequests(receivedUserUuid: string): Promise<FriendRequest[]> {
-    return this.friendRequestRepo.getFriendRequests(receivedUserUuid);
-  }
-
-  update(id: number, updateFriendRequestDto: UpdateFriendRequestDto) {
-    return `This action updates a #${id} friendRequest`;
-  }
-
-  delete(uuid: string) {
-    return this.friendRequestRepo.delete(uuid);
   }
 }
