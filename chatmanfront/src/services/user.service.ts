@@ -1,5 +1,5 @@
 import http from "./http.client";
-import type { User } from "@/models/User"
+import type { User } from "@/models/User";
 
 export class UserService {
   async createUser(
@@ -12,19 +12,21 @@ export class UserService {
       username: username,
       password: password,
     });
-    localStorage.setItem('loggedInUser', JSON.stringify(res.data));
+    localStorage.setItem("loggedInUser", JSON.stringify(res.data));
     return res.data;
   }
 
-  async loginUser(
-    username: string,
-    password: string
-  ): Promise<User> {
+  async loginUser(username: string, password: string): Promise<User> {
     const res = await http.post<User>("auth/login", {
       username: username,
-      password: password
+      password: password,
     });
-    localStorage.setItem('loggedInUser', JSON.stringify(res.data));
-    return res.data
+    localStorage.setItem("loggedInUserToken", JSON.stringify(res.data));
+    return res.data;
+  }
+
+  async getUser(token: string){
+    const res = localStorage.getItem("loggedInUserToken")
+    await http.get("auth/user")
   }
 }
