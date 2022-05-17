@@ -11,6 +11,7 @@ import { RoomsService } from '../domain/services/rooms.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { StringDto } from '../universalDtos/string.dto';
+import { TwoStringDto } from '../universalDtos/twoString.dto';
 
 @Controller('rooms')
 export class RoomsController {
@@ -39,5 +40,13 @@ export class RoomsController {
   @Post('delete')
   remove(@Body() roomName: StringDto) {
     return this.roomsService.remove(roomName.text);
+  }
+
+  @Post('debugfriend')
+  debugAddFriend(@Body() addFreind: TwoStringDto) {
+    return this.roomsService.debugFriend(
+      addFreind.firstString,
+      addFreind.secondString,
+    );
   }
 }

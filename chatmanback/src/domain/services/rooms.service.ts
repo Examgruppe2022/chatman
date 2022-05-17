@@ -75,4 +75,15 @@ export class RoomsService {
     }
     return friendsRoomsReturn;
   }
+
+  debugFriend(sender: string, friend: string) {
+    this.userModel.findOneAndUpdate(
+      { username: friend },
+      { $push: { friends: sender } },
+    );
+    return this.userModel.findOneAndUpdate(
+      { username: sender },
+      { $push: { friends: friend } },
+    );
+  }
 }
