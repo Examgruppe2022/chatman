@@ -1,6 +1,6 @@
 <script lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-
+import PWAPrompt from './components/PWAPrompt.vue'
 
 import { computed, createApp } from "vue";
 import App from "./App.vue";
@@ -9,6 +9,7 @@ import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
 
 export default {
+  components: {PWAPrompt},
   setup() {
     const userStore = UserStore();
     const showToolBar = computed<boolean>((): boolean => {
@@ -46,6 +47,7 @@ export default {
 </script>
 
 <template>
+  <PWAPrompt />
   <Toolbar style="margin: 5px 15px" v-if="true">
     <template #start>
       <div id="img_reroute" @click="$router.push('/')">
