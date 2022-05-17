@@ -1,5 +1,6 @@
 import http from "./http.client";
 import type { User } from "@/models/User"
+import { request } from "https";
 
 export class UserService {
   async createUser(

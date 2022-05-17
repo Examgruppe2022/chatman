@@ -2,14 +2,14 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateRoomDto } from '../../rooms/dto/create-room.dto';
 import { UpdateRoomDto } from '../../rooms/dto/update-room.dto';
 import { Model } from 'mongoose';
-import { userEntity } from '../../core/entities/user.entity';
+import { UserEntity } from '../../core/entities/User.Entity';
 import { RoomEntity } from '../../core/entities/roomEntity';
 
 @Injectable()
 export class RoomsService {
   constructor(
     @Inject('ROOM_MODEL') private readonly roomModel: Model<RoomEntity>,
-    @Inject('USER_MODEL') private readonly userModel: Model<userEntity>,
+    @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
   ) {}
 
   async create(createRoomDto: CreateRoomDto) {

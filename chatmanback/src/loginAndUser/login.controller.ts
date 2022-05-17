@@ -7,22 +7,20 @@ import {
   Param,
   Delete,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { LoginService } from '../domain/services/login.service';
-import { LoginDto } from './dto/login.dto';
+
 import { RegistrationDto } from './dto/registration.dto';
-import { UserAndTokenDTO } from './dto/userAndTokenDTO';
+
 import { LocalAuthGuard } from './local-auth.guard';
-import { userEntity } from '../core/entities/user.entity';
-import { Interceptor } from '../loginAndUser/Interceptor';
-import { promises } from 'dns';
+import { LoginDto } from './dto/login.dto';
+import { UserEntity } from '../core/entities/User.Entity';
+import { JwtAuthGuard } from './Jwt-auth.Guard';
 
 @Controller('auth')
 export class LoginController {
-  constructor(
-    private readonly loginService: LoginService,
-    private readonly interceptor: Interceptor,
-  ) {}
+  constructor(private readonly loginService: LoginService) {}
 
   @Post('/register')
   async create(@Body() registerDTO: RegistrationDto) {
@@ -30,29 +28,16 @@ export class LoginController {
       return 'user created';
     });
   }
-  /*
-  @Post()
-  async loginAndUser(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
-    const user = await this.loginService.validateUser(loginDTO);
-    const uatdto = new UserAndTokenDTO();
-    uatdto.loginUser = user;
-    uatdto.token = 'temp';
-    return uatdto;
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  async login(@Request() req) {
+    return this.loginService.login(req.user);
   }
 
-    @Post('/loginAndUser')
-    loginAndUser(@Body() loginDTO: LoginDto) {
-      return this.loginService.validateUser(loginDTO);
-    }
-    */
-
-  @Post('login')
-  async login(@Body() loginDTO: LoginDto): Promise<UserAndTokenDTO> {
-    const tokenToAdd = await this.loginService.validateUser(loginDTO);
-    const user = loginDTO;
-    const utDTO = new UserAndTokenDTO();
-    utDTO.loginUser = user;
-    utDTO.token = tokenToAdd;
-    return utDTO;
+  @UseGuards(JwtAuthGuard)
+  @Get('user')
+  getUser(@Request() req) {
+    return req.user;
   }
 }

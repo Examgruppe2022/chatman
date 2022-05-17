@@ -1,16 +1,16 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { LoginDto } from '../../loginAndUser/dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { Model } from 'mongoose';
 import { RegistrationDto } from '../../loginAndUser/dto/registration.dto';
-import { userEntity } from '../../core/entities/user.entity';
+import { UserEntity } from '../../core/entities/User.Entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserAndTokenDTO } from '../../loginAndUser/dto/userAndTokenDTO';
 
 @Injectable()
 export class LoginService {
   constructor(
-    @Inject('USER_MODEL') private readonly userModel: Model<userEntity>,
+    @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
     private jwtService: JwtService,
   ) {}
 
@@ -45,35 +45,28 @@ export class LoginService {
   }
 
   //this compares 2 passwords, and returns a user if the password was correct.
-  async validateUser(loginDTO: LoginDto) {
-    const userFromDb = await this.getUser(loginDTO);
-    const rightPassword = await bcrypt.compare(
-      loginDTO.password,
-      userFromDb.password,
-    );
-    if (rightPassword == true) {
-      const payload = { username: loginDTO.username };
-      return {
-        access_token: this.jwtService.sign(payload),
-      };
+  async validateUser(username: string, password: string) {
+    const userFromDb = await this.getUser(username, password);
+    const rightPassword = await bcrypt.compare(password, userFromDb.password);
+    if (rightPassword) {
+      return userFromDb;
     } else {
-      throw new Error('The entered password was wrong password');
+      throw new UnauthorizedException();
     }
   }
 
-  async getUser(loginDTO: LoginDto): Promise<userEntity> {
-    return await this.userModel
-      .findOne({
-        username: loginDTO.username,
-      })
-      .exec();
+  async login(user: any) {
+    const payload = { username: user.username, sub: user._id };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 
-  async attachToken(logindto: LoginDto): Promise<UserAndTokenDTO> {
-    const token = await this.validateUser(logindto);
-    let utDTO: UserAndTokenDTO;
-    utDTO.token = token;
-    utDTO.loginUser = logindto;
-    return utDTO;
+  async getUser(username: string, password: string): Promise<UserEntity> {
+    return await this.userModel
+      .findOne({
+        username: username,
+      })
+      .exec();
   }
 }
