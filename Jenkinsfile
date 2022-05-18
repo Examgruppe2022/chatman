@@ -34,7 +34,7 @@ pipeline {
                 }
             }
         }
-        /*stage('building: frontend') {
+        stage('building: frontend') {
 
             steps{
                 sh"echo '[Frontend] is building...'"
@@ -44,7 +44,7 @@ pipeline {
                 }
                 sh "docker-compose --env-file config/Test.env build web"
             }
-        } */
+        }
         stage('reset containers') {
             steps{
                 script{
