@@ -9,7 +9,11 @@ pipeline {
 
     stages{
         stage('building: backend') {
-
+            when{
+                anyOf{
+                    changeset "chatmanback/**"
+                }
+            }
             steps{
                 sh "echo '[BackEnd] is building...'"
                 dir("chatmanback"){
@@ -25,6 +29,11 @@ pipeline {
             }
         }
         stage('backend tests') {
+            when{
+                anyOf{
+                    changeset "chatmanback/**"
+                }
+            }
             steps{
                 sh"echo 'TBD: this should run all tests in the (domain.test) folder'"
             }
@@ -35,7 +44,11 @@ pipeline {
             }
         }
         stage('building: frontend') {
-
+            when{
+                anyOf{
+                    changeset "chatmanfront/**"
+                }
+            }
             steps{
                 sh"echo '[Frontend] is building...'"
                 dir("chatmanfront"){
