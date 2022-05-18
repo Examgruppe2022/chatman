@@ -1,49 +1,49 @@
-import { UpdateFriendRequestDto } from '../../friend-requests/dto/update-friend-requests.dto';
 import { FriendRequestEntity } from '../../core/entities/friend-request.entity';
-import { Inject, Injectable } from "@nestjs/common";
-import { Model } from "mongoose";
-import { UserEntity } from "../../core/entities/User.Entity";
-import { CreateFriendRequestDto } from "../../friend-requests/dto/create-friend-requests.dto";
+import { Inject, Injectable } from '@nestjs/common';
+import { Model } from 'mongoose';
+import { UserEntity } from '../../core/entities/User.Entity';
+import { CreateFriendRequestDto } from '../../friend-requests/dto/create-friend-requests.dto';
 
 @Injectable()
 export class FriendRequestsService {
   constructor(
-    @Inject('FRIENDREQUEST_MODEL') private readonly friendRequestModel: Model<FriendRequestEntity>,
+    @Inject('FRIENDREQUEST_MODEL')
+    private readonly friendRequestModel: Model<FriendRequestEntity>,
     @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
   ) {}
 
-  async create(request: CreateFriendRequestDto){
+  async create(request: CreateFriendRequestDto) {
     const alreadySent = await this.friendRequestModel.findOne({
       senderUsername: request.senderUsername,
       receiverUsername: request.receiverUsername,
     });
     if (alreadySent) {
-      throw new Error('You have already sent a request to this user')
-    }
-    else {
+      throw new Error('You have already sent a request to this user');
+    } else {
       const newRequest = new this.friendRequestModel({
         senderUsername: request.senderUsername,
         receiverUsername: request.receiverUsername,
-        isAccepted: false
-      })
+        isAccepted: false,
+      });
       return newRequest.save();
     }
   }
 
-  async getAllMyFriendRequests(username: String) {
+  async getAllMyFriendRequests(username: string) {
     const friendRequests: FriendRequestEntity[] = [];
     const receivedFriendRequest = await this.friendRequestModel.find({
-      receiverUsername: username, isAccepted: false
-    })
-    receivedFriendRequest.forEach(function(request) {
+      receiverUsername: username,
+      isAccepted: false,
+    });
+    receivedFriendRequest.forEach(function (request) {
       friendRequests.push(
         new FriendRequestEntity({
           senderUsername: request.senderUsername,
           receiverUsername: request.receiverUsername,
-          isAccepted: request.isAccepted
-        })
-      )
-    })
+          isAccepted: request.isAccepted,
+        }),
+      );
+    });
     return friendRequests;
   }
 
@@ -56,12 +56,15 @@ export class FriendRequestsService {
       { username: accept.receiverUsername },
       { $push: { friends: accept.senderUsername } },
     );
-    return this.friendRequestModel.findOneAndUpdate({
-      senderUsername: accept.senderUsername,
-      receiverUsername: accept.receiverUsername,
-    },{
-      isAccepted: true
-    });
+    return this.friendRequestModel.findOneAndUpdate(
+      {
+        senderUsername: accept.senderUsername,
+        receiverUsername: accept.receiverUsername,
+      },
+      {
+        isAccepted: true,
+      },
+    );
   }
 
   findAll() {
