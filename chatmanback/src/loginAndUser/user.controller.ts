@@ -15,4 +15,9 @@ export class UserController {
   getMe(@Body() login: LoginDto) {
     return this.userService.getMe(login.username);
   }
+
+  @Post('/friends')
+  getFriends(@Body() username: StringDto) {
+    return this.userService.getFriends(username.text);
+  }
 }

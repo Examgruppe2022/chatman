@@ -29,6 +29,20 @@ export class UserService {
 
   async getMe(username: string) {
     const me = await this.userModel.findOne({ username: username });
-    return me;
+    return new UserEntity({
+      username: me.username,
+      email: me.email,
+      password: me.password,
+      friends: me.friends,
+    });
+  }
+
+  async getFriends(username: string) {
+    const me = await this.getMe(username);
+    const myFriends: UserEntity[] = [];
+    me.friends.forEach(function (friend) {
+      myFriends.push(this.getMe(friend));
+    });
+    return myFriends;
   }
 }
