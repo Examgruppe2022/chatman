@@ -58,7 +58,7 @@ pipeline {
                 sh "docker-compose --env-file config/Test.env build web"
             }
         }
-        /*stage('reset containers') {
+        stage('reset containers') {
             steps{
                 script{
                     try{
@@ -67,7 +67,7 @@ pipeline {
                     finally {}
                 }
             }
-        }*/
+        }
         stage('deployment') {
             steps{
                 sh "docker-compose --env-file ./config/Test.env up -d"
