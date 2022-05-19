@@ -9,7 +9,26 @@ export class UserService {
     private jwtService: JwtService,
   ) {}
 
-  async getAllFromInput() {
-    return this.userModel.find();
+  async getAllExceptMe(myUsername: string) {
+    const allUsers = await this.userModel.find();
+    const allUsersMinusMe: UserEntity[] = [];
+    allUsers.forEach(function (user) {
+      if (user.username != myUsername) {
+        allUsersMinusMe.push(
+          new UserEntity({
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            friends: user.friends,
+          }),
+        );
+      }
+    });
+    return allUsersMinusMe;
+  }
+
+  async getMe(username: string) {
+    const me = await this.userModel.findOne({ username: username });
+    return me;
   }
 }

@@ -17,8 +17,14 @@ export class FriendRequestsService {
       senderUsername: request.senderUsername,
       receiverUsername: request.receiverUsername,
     });
-    if (alreadySent) {
-      throw new Error('You have already sent a request to this user');
+    const alreadyRecived = await this.friendRequestModel.findOne({
+      senderUsername: request.receiverUsername,
+      receiverUsername: request.senderUsername,
+    });
+    if (alreadySent || alreadyRecived) {
+      throw new Error(
+        'You have already sent or recived a request from this user',
+      );
     } else {
       const newRequest = new this.friendRequestModel({
         senderUsername: request.senderUsername,

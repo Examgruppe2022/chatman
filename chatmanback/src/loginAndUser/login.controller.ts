@@ -10,9 +10,7 @@ import {
   Request,
 } from '@nestjs/common';
 import { LoginService } from '../domain/services/login.service';
-
 import { RegistrationDto } from './dto/registration.dto';
-
 import { LocalAuthGuard } from './local-auth.guard';
 import { LoginDto } from './dto/login.dto';
 import { UserEntity } from '../core/entities/User.Entity';
