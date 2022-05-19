@@ -8,6 +8,11 @@ export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
     loggedInUser: undefined as User | undefined,
+    users:[{ name:" testuser1"}, {name: "testuser2"}],
+    userInfo:{
+      name:"",
+      username:"",
+    }
   }),
   getters: {
     userName: (state) => {
@@ -30,6 +35,21 @@ export const UserStore = defineStore({
     logOut() {
       this.loggedInUser = undefined;
     },
+
+    findFriends(search: string) {
+      userService
+        .findFriends(search)
+        .then((friends) => (this.users = friends))
+        .catch((err) => console.log(err))
+    },
+
+    getUserInfo(search: string){
+      userService
+        .getInfo(search)
+        .then((info) => (this.userInfo = info))
+        .catch((err) => console.log(err))
+    },
+
     loginUser(username: string, password: string) {
       userService
         .loginUser(username, password)
