@@ -1,9 +1,10 @@
 import { UserService } from '../domain/services/user.service';
-import { Body, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserEntity } from '../core/entities/User.Entity';
 import { StringDto } from '../universalDtos/string.dto';
 import { LoginDto } from './dto/login.dto';
 
+@Controller('/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

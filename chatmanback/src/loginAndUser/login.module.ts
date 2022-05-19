@@ -8,6 +8,8 @@ import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constans';
 import { JwtStrategy } from './jwt.strategy';
+import { UserController } from './user.controller';
+import { UserService } from '../domain/services/user.service';
 
 @Module({
   imports: [
@@ -18,8 +20,14 @@ import { JwtStrategy } from './jwt.strategy';
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  controllers: [LoginController],
-  providers: [LoginService, ...userProvider, LocalStrategy, JwtStrategy],
-  exports: [LoginService],
+  controllers: [LoginController, UserController],
+  providers: [
+    LoginService,
+    ...userProvider,
+    LocalStrategy,
+    JwtStrategy,
+    UserService,
+  ],
+  exports: [LoginService, UserService],
 })
 export class LoginModule {}
