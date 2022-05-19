@@ -10,7 +10,7 @@ services:
     ports:
       - "${WEB_PORT}:80"
   mongo:
-    image: 'mongo:3.4.1'
+    image: 'mongo:4'
     ports:
       - '27017:27017'
     volumes:
