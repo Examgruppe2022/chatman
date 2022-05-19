@@ -45,4 +45,18 @@ export class UserService {
     });
     return myFriends;
   }
+
+  async getNonFriends(username: string) {
+    const me = await this.getMe(username);
+    const everyone = await this.getAllExceptMe(username);
+    const returnList: UserEntity[] = [];
+    everyone.forEach(function (user) {
+      me.friends.forEach(function (friend) {
+        if (user.username != friend) {
+          returnList.push(user);
+        }
+      });
+    });
+    return returnList;
+  }
 }

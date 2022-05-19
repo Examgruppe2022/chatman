@@ -20,4 +20,9 @@ export class UserController {
   getFriends(@Body() username: StringDto) {
     return this.userService.getFriends(username.text);
   }
+
+  @Post('/getNonFriends')
+  getNonFriends(@Body() username: StringDto) {
+    return this.userService.getNonFriends(username.text);
+  }
 }
