@@ -1,6 +1,4 @@
-import { UserStore } from "@/stores/userStore";
-import { ChatStore } from "@/stores/chatStore";
-import type { Room } from "@/Models/Room";
+import type { Room } from "@/models/Room";
 import http from "./http.client";
 
 export class RoomService {

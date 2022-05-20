@@ -56,6 +56,9 @@ export class UserService {
           returnList.push(user);
         }
       });
+      if (username == '') {
+        returnList.push(me);
+      }
     });
     return returnList;
   }
