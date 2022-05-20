@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
-import type { User } from "@/models/User";
-import { UserService } from "@/services/user.service";
+import { UserService } from "@/Services/user.service";
+import type { User } from "@/Models/User";
+
 
 const userService: UserService = new UserService();
 
