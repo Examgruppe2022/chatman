@@ -22,6 +22,14 @@ import { UserService } from '../domain/services/user.service';
   ],
   controllers: [LoginController, UserController],
   providers: [
+    {
+      provide: 'IUserService',
+      useClass: UserService,
+    },
+    {
+      provide: 'ILoginService',
+      useClass: LoginService,
+    },
     LoginService,
     ...userProvider,
     LocalStrategy,

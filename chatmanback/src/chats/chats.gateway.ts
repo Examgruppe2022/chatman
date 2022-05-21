@@ -7,13 +7,17 @@ import {
 import { ChatsService } from '../domain/services/chats.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { Server } from 'socket.io';
+import { Inject } from '@nestjs/common';
+import { IChatsService } from '../core/Iservices/IChatsService';
 
 @WebSocketGateway()
 export class ChatsGateway {
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly chatsService: ChatsService) {}
+  constructor(
+    @Inject('IChatsService') private readonly chatsService: IChatsService,
+  ) {}
 
   @SubscribeMessage('createChat')
   create(@MessageBody() createChatDto: CreateChatDto) {

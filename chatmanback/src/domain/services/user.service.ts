@@ -2,8 +2,9 @@ import { UserEntity } from '../../core/entities/User.Entity';
 import { Inject } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
+import { IUserService } from '../../core/Iservices/IUserService';
 
-export class UserService {
+export class UserService implements IUserService {
   constructor(
     @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
     private jwtService: JwtService,
@@ -14,35 +15,23 @@ export class UserService {
     const allUsersMinusMe: UserEntity[] = [];
     allUsers.forEach(function (user) {
       if (user.username != myUsername) {
-        allUsersMinusMe.push(
-          new UserEntity({
-            username: user.username,
-            email: user.email,
-            password: user.password,
-            friends: user.friends,
-          }),
-        );
+        allUsersMinusMe.push(user);
       }
     });
     return allUsersMinusMe;
   }
 
-  async getMe(username: string) {
+  async getMe(username: string): Promise<UserEntity> {
     const me = await this.userModel.findOne({ username: username });
-    return new UserEntity({
-      username: me.username,
-      email: me.email,
-      password: me.password,
-      friends: me.friends,
-    });
+    return me;
   }
 
-  async getFriends(username: string) {
+  async getFriends(username: string): Promise<UserEntity[]> {
     const me = await this.getMe(username);
     const myFriends: UserEntity[] = [];
-    me.friends.forEach(function (friend) {
-      myFriends.push(this.getMe(friend));
-    });
+    for (const friend of me.friends) {
+      myFriends.push(await this.userModel.findOne({ username: friend }));
+    }
     return myFriends;
   }
 
@@ -56,9 +45,6 @@ export class UserService {
           returnList.push(user);
         }
       });
-      if (username == '') {
-        returnList.push(me);
-      }
     });
     return returnList;
   }

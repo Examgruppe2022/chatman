@@ -12,7 +12,7 @@ export class FriendRequestsService {
     @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
   ) {}
 
-  async create(request: CreateFriendRequestDto) {
+  async SendRequest(request: CreateFriendRequestDto) {
     const alreadySent = await this.friendRequestModel.findOne({
       senderUsername: request.senderUsername,
       receiverUsername: request.receiverUsername,
@@ -42,13 +42,7 @@ export class FriendRequestsService {
       isAccepted: false,
     });
     receivedFriendRequest.forEach(function (request) {
-      friendRequests.push(
-        new FriendRequestEntity({
-          senderUsername: request.senderUsername,
-          receiverUsername: request.receiverUsername,
-          isAccepted: request.isAccepted,
-        }),
-      );
+      friendRequests.push(request);
     });
     return friendRequests;
   }
@@ -71,9 +65,5 @@ export class FriendRequestsService {
         isAccepted: true,
       },
     );
-  }
-
-  findAll() {
-    return `This action returns all friendRequests`;
   }
 }

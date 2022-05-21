@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export class Chat extends Document {
+export class ChatEntity extends Document {
   readonly text: string;
   readonly sender: string;
   readonly room: string;

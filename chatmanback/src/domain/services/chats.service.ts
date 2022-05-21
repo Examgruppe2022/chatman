@@ -3,13 +3,13 @@ import { CreateChatDto } from '../../chats/dto/create-chat.dto';
 import { UpdateChatDto } from '../../chats/dto/update-chat.dto';
 import { Model } from 'mongoose';
 import { RoomEntity } from '../../core/entities/roomEntity';
-import { Chat } from '../../core/entities/chat.entity';
+import { ChatEntity } from '../../core/entities/chat.entity';
 
 @Injectable()
 export class ChatsService {
   constructor(
     @Inject('ROOM_MODEL') private readonly roomModel: Model<RoomEntity>,
-    @Inject('CHAT_MODEL') private readonly chatModel: Model<Chat>,
+    @Inject('CHAT_MODEL') private readonly chatModel: Model<ChatEntity>,
   ) {}
 
   saveChat(chat: CreateChatDto) {
@@ -23,19 +23,12 @@ export class ChatsService {
   }
 
   async getChatsFromRoom(roomNameInput: string) {
-    const chatList: Chat[] = [];
+    const chatList: ChatEntity[] = [];
     const isRoomReal = await this.verifyRoom(roomNameInput);
     if (isRoomReal == true) {
       const chats = await this.chatModel.find({ room: roomNameInput });
       chats.forEach(function (chat) {
-        chatList.push(
-          new Chat({
-            text: chat.text,
-            sender: chat.sender,
-            room: chat.room,
-            timeStamp: chat.timeStamp,
-          }),
-        );
+        chatList.push(chat);
       });
       return chatList;
     } else {
