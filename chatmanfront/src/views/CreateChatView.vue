@@ -14,6 +14,10 @@
 
 
 <script>
+
+export default {
+  name: "CreateChatView.vue"
+};
 import { ref } from "vue";
 import { RoomService } from "@/services/room.service";
 

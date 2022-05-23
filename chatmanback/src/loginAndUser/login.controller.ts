@@ -17,7 +17,7 @@ import { UserEntity } from '../core/entities/User.Entity';
 import { JwtAuthGuard } from './Jwt-auth.Guard';
 import { ILoginService } from '../core/Iservices/ILoginService';
 
-@Controller('auth')
+@Controller('/auth')
 export class LoginController {
   constructor(
     @Inject('ILoginService') private readonly loginService: ILoginService,
@@ -25,6 +25,7 @@ export class LoginController {
 
   @Post('/register')
   async create(@Body() registerDTO: RegistrationDto) {
+    console.log(registerDTO);
     this.loginService.create(registerDTO).then((newUser) => {
       return 'user created';
     });

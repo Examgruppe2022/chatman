@@ -2,10 +2,10 @@
   <div class="center_man">
     <h3>Create New User</h3>
     <br>
+    <InputText v-model="inputEmail" style="margin-bottom: 10px" placeholder="Enter Email" />
     <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
-    <InputText v-model="inputEmail" style="margin-bottom: 10px" placeholder="Enter E-mail" />
     <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" />
-    <Button class="p-button-rounded p-button-secondary " > Sign up </Button>
+    <Button @click="handleCreateUser" class="p-button-rounded p-button-secondary " > Sign up </Button>
   </div>
 </template>
 
@@ -18,6 +18,11 @@ const userStore = UserStore();
 const inputUsername = ref("");
 const inputPassword = ref("");
 const inputEmail = ref("");
+
+function handleCreateUser() {
+  userStore.createUser(inputEmail.value, inputUsername.value, inputPassword.value)
+  window.location.href= ("/")
+}
 
 </script>
 <style>

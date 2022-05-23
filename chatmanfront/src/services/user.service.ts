@@ -3,13 +3,13 @@ import type { User } from "@/models/User";
 
 export class UserService {
   async createUser(
-    name: string,
     username: string,
+    email: string,
     password: string
   ): Promise<User> {
-    const res = await http.post<User>("/users", {
-      name: name,
-      username: username,
+    const res = await http.post<User>("/auth/register", {
+      username: email,
+      email: username,
       password: password,
     });
     localStorage.setItem("loggedInUser", JSON.stringify(res.data));

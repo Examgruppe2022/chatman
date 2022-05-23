@@ -42,6 +42,8 @@ export const UserStore = defineStore({
         .findFriends(search)
         .then((friends) => (this.users = friends))
         .catch((err) => console.log(err))
+      console.log('test');
+      console.log(this.users);
     },
 
     getUserInfo(search: string){
