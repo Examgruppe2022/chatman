@@ -9,7 +9,7 @@ import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
 
 export default {
-  components: {PWAPrompt},
+  components: { PWAPrompt },
   setup() {
     const userStore = UserStore();
     const showToolBar = computed<boolean>((): boolean => {

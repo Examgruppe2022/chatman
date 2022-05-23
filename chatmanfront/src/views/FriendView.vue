@@ -17,6 +17,7 @@
       <div>{{ slotProps.option.name }}</div>
     </div>
   </Listbox>
+  <Button @click="searchFriend">Search</Button>
 </template>
 
 <script setup lang="ts">

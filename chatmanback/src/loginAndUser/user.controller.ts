@@ -4,6 +4,7 @@ import { UserEntity } from '../core/entities/User.Entity';
 import { StringDto } from '../universalDtos/string.dto';
 import { LoginDto } from './dto/login.dto';
 import { IUserService } from '../core/Iservices/IUserService';
+import { TwoStringDto } from '../universalDtos/twoString.dto';
 
 @Controller('/user')
 export class UserController {
@@ -26,7 +27,12 @@ export class UserController {
   }
 
   @Post('/getNonFriends')
-  getNonFriends(@Body() username: StringDto) {
-    return this.userService.getNonFriends(username.text);
+  async getNonFriends(@Body() username: TwoStringDto) {
+    const returnData = await this.userService.getNonFriends(
+      username.firstString,
+      username.secondString,
+    );
+    console.log(returnData);
+    return returnData;
   }
 }

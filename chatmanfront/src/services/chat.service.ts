@@ -2,10 +2,10 @@ import { io } from "socket.io-client";
 import  type { Chat } from "@/models/Chat"
 
 export class ChatService {
-  socket = io("localhost:3001");
+  socket = io("localhost:80");
 
   constructor() {
-    this.socket.connect();
+
     this.socket.on("connect", () => {
       console.log(this.socket.id);
     });

@@ -10,7 +10,7 @@ import { Server } from 'socket.io';
 import { Inject } from '@nestjs/common';
 import { IChatsService } from '../core/Iservices/IChatsService';
 
-@WebSocketGateway()
+@WebSocketGateway({ cors: { origin: '*' } })
 export class ChatsGateway {
   @WebSocketServer()
   server: Server;

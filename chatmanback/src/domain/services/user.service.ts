@@ -35,17 +35,18 @@ export class UserService implements IUserService {
     return myFriends;
   }
 
-  async getNonFriends(username: string) {
+  async getNonFriends(username: string, search: string): Promise<UserEntity[]> {
     const me = await this.getMe(username);
     const everyone = await this.getAllExceptMe(username);
     const returnList: UserEntity[] = [];
     everyone.forEach(function (user) {
       me.friends.forEach(function (friend) {
-        if (user.username != friend) {
+        if (user.username != friend && user.username.includes(search) == true) {
           returnList.push(user);
         }
       });
     });
+    console.log(returnList);
     return returnList;
   }
 }

@@ -7,5 +7,5 @@ export interface IUserService {
 
   getFriends(username: string): Promise<UserEntity[]>;
 
-  getNonFriends(username: string);
+  getNonFriends(username: string, search: string): Promise<UserEntity[]>;
 }

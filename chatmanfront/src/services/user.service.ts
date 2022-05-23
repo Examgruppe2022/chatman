@@ -32,9 +32,8 @@ export class UserService {
 
   async findFriends(search:string): Promise<User[]> {
     const res = await http.post<User[]>("/getNonfriends",{
-      name:search,
-      username:"",
-      password:"",
+     firstString: "first",
+      secondString:"",
     });
     return res.data
   }
