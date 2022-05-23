@@ -6,9 +6,10 @@ import { RegistrationDto } from '../../loginAndUser/dto/registration.dto';
 import { UserEntity } from '../../core/entities/User.Entity';
 import { JwtService } from '@nestjs/jwt';
 import { UserAndTokenDTO } from '../../loginAndUser/dto/userAndTokenDTO';
+import { ILoginService } from '../../core/Iservices/ILoginService';
 
 @Injectable()
-export class LoginService {
+export class LoginService implements ILoginService {
   constructor(
     @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
     private jwtService: JwtService,

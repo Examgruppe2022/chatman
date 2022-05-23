@@ -7,6 +7,15 @@ import { MongoDbModule } from '../infrastructure/mongoDB/mongoDB.module';
 
 @Module({
   imports: [MongoDbModule],
-  providers: [ChatsGateway, ChatsService, ...roomProvider, ...chatProvider],
+  providers: [
+    {
+      provide: 'IChatsService',
+      useClass: ChatsService,
+    },
+    ChatsGateway,
+    ChatsService,
+    ...roomProvider,
+    ...chatProvider,
+  ],
 })
 export class ChatsModule {}

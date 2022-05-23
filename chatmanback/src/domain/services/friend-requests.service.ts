@@ -12,13 +12,19 @@ export class FriendRequestsService {
     @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
   ) {}
 
-  async create(request: CreateFriendRequestDto) {
+  async SendRequest(request: CreateFriendRequestDto) {
     const alreadySent = await this.friendRequestModel.findOne({
       senderUsername: request.senderUsername,
       receiverUsername: request.receiverUsername,
     });
-    if (alreadySent) {
-      throw new Error('You have already sent a request to this user');
+    const alreadyRecived = await this.friendRequestModel.findOne({
+      senderUsername: request.receiverUsername,
+      receiverUsername: request.senderUsername,
+    });
+    if (alreadySent || alreadyRecived) {
+      throw new Error(
+        'You have already sent or recived a request from this user',
+      );
     } else {
       const newRequest = new this.friendRequestModel({
         senderUsername: request.senderUsername,
@@ -36,13 +42,7 @@ export class FriendRequestsService {
       isAccepted: false,
     });
     receivedFriendRequest.forEach(function (request) {
-      friendRequests.push(
-        new FriendRequestEntity({
-          senderUsername: request.senderUsername,
-          receiverUsername: request.receiverUsername,
-          isAccepted: request.isAccepted,
-        }),
-      );
+      friendRequests.push(request);
     });
     return friendRequests;
   }
@@ -65,9 +65,5 @@ export class FriendRequestsService {
         isAccepted: true,
       },
     );
-  }
-
-  findAll() {
-    return `This action returns all friendRequests`;
   }
 }

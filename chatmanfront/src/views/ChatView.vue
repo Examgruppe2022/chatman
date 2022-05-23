@@ -3,7 +3,7 @@
   <div class="left-man">
     <div class="top-man">
   <br />
-  <h3>Send a Message</h3>
+      <h3>Send a Message</h3>
   <InputText v-model="txtChatInput" placeholder="Enter message" />
       <br/>
   <Button class="p-button-rounded p-button-secondary " @click="sendChat">Send</Button>
@@ -11,11 +11,12 @@
   <br />
   </div>
     </div>
-  <ul>
+  <div>
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
       {{ chat.sender }} : {{ chat.text }}
     </li>
-  </ul>
+  </div>
+
 </template>
 
 <script setup lang="ts">
@@ -45,25 +46,19 @@ function sendChat() {
 </script>
 
 <style>
-.top-man {
-  height: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 .left-man{
-  height: 20%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: left;
 }
-.center_man {
-  height: 20%;
+.top-man{
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
+
 </style>

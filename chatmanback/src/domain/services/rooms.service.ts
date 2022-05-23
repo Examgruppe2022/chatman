@@ -4,9 +4,10 @@ import { UpdateRoomDto } from '../../rooms/dto/update-room.dto';
 import { Model } from 'mongoose';
 import { UserEntity } from '../../core/entities/User.Entity';
 import { RoomEntity } from '../../core/entities/roomEntity';
+import { IRoomsService } from '../../core/Iservices/IRoomsService';
 
 @Injectable()
-export class RoomsService {
+export class RoomsService implements IRoomsService {
   constructor(
     @Inject('ROOM_MODEL') private readonly roomModel: Model<RoomEntity>,
     @Inject('USER_MODEL') private readonly userModel: Model<UserEntity>,
@@ -31,18 +32,13 @@ export class RoomsService {
     const roomsList: RoomEntity[] = [];
     const ownRooms = await this.roomModel.find({ roomCreator: username });
     ownRooms.forEach(function (room) {
-      roomsList.push(
-        new RoomEntity({
-          roomName: room.roomName,
-          roomCreator: room.roomCreator,
-        }),
-      );
+      roomsList.push(room);
     });
     return roomsList;
   }
 
-  remove(roomname: string) {
-    return this.roomModel.findOneAndRemove({ roomName: roomname });
+  remove(roomName: string) {
+    return this.roomModel.findOneAndRemove({ roomName: roomName });
   }
 
   async findAllAccessibleRooms(username: string) {
@@ -65,12 +61,7 @@ export class RoomsService {
     for (const friend of user.friends) {
       const friendsRooms = await this.roomModel.find({ roomCreator: username });
       friendsRooms.forEach(function (room) {
-        friendsRoomsReturn.push(
-          new RoomEntity({
-            roomName: room.roomName,
-            roomCreator: room.roomCreator,
-          }),
-        );
+        friendsRoomsReturn.push(room);
       });
     }
     return friendsRoomsReturn;

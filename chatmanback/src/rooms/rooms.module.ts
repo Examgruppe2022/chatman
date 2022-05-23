@@ -8,6 +8,14 @@ import { MongoDbModule } from '../infrastructure/mongoDB/mongoDB.module';
 @Module({
   imports: [MongoDbModule],
   controllers: [RoomsController],
-  providers: [RoomsService, ...roomProvider, ...userProvider],
+  providers: [
+    {
+      provide: 'IRoomService',
+      useClass: RoomsService,
+    },
+    RoomsService,
+    ...roomProvider,
+    ...userProvider,
+  ],
 })
 export class RoomsModule {}

@@ -1,5 +1,7 @@
 <template>
   <div class="center_man">
+    <h3>Create New User</h3>
+    <br>
     <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
     <InputText v-model="inputEmail" style="margin-bottom: 10px" placeholder="Enter E-mail" />
     <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" />

@@ -1,12 +1,32 @@
 import { UserService } from '../domain/services/user.service';
-import { Body, Get } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { UserEntity } from '../core/entities/User.Entity';
+import { StringDto } from '../universalDtos/string.dto';
+import { LoginDto } from './dto/login.dto';
+import { IUserService } from '../core/Iservices/IUserService';
 
+@Controller('/user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    @Inject('IUserService') private readonly userService: IUserService,
+  ) {}
 
-  @Get()
-  getAllUsers(@Body() input: string): Promise<UserEntity[]> {
-    return this.userService.getAllFromInput();
+  @Post('/getAllOtherUsers')
+  getAllUsers(@Body() myUsername: StringDto): Promise<UserEntity[]> {
+    return this.userService.getAllExceptMe(myUsername.text);
+  }
+  @Post('/getMe')
+  getMe(@Body() login: LoginDto) {
+    return this.userService.getMe(login.username);
+  }
+
+  @Post('/friends')
+  getFriends(@Body() username: StringDto) {
+    return this.userService.getFriends(username.text);
+  }
+
+  @Post('/getNonFriends')
+  getNonFriends(@Body() username: StringDto) {
+    return this.userService.getNonFriends(username.text);
   }
 }

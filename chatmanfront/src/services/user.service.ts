@@ -29,4 +29,22 @@ export class UserService {
     const res = localStorage.getItem("loggedInUserToken")
     await http.get("auth/user")
   }
+
+  async findFriends(search:string): Promise<User[]> {
+    const res = await http.post<User[]>("/getNonfriends",{
+      name:search,
+      username:"",
+      password:"",
+    });
+    return res.data
+  }
+
+  async getInfo(search : string): Promise<User> {
+    const res = await  http.post<User>("/profiles/info", {
+      name: search,
+      username:"",
+      password:"",
+    });
+    return res.data;
+  }
 }

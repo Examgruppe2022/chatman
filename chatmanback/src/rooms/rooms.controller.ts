@@ -6,16 +6,20 @@ import {
   Patch,
   Param,
   Delete,
+  Inject,
 } from '@nestjs/common';
 import { RoomsService } from '../domain/services/rooms.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { StringDto } from '../universalDtos/string.dto';
 import { TwoStringDto } from '../universalDtos/twoString.dto';
+import { IRoomsService } from '../core/Iservices/IRoomsService';
 
 @Controller('rooms')
 export class RoomsController {
-  constructor(private readonly roomsService: RoomsService) {}
+  constructor(
+    @Inject('IRoomService') private readonly roomsService: IRoomsService,
+  ) {}
 
   @Post('createRoom')
   create(@Body() createRoomDto: CreateRoomDto) {
