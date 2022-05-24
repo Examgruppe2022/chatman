@@ -35,8 +35,10 @@ pipeline {
                 }
             }*/
             steps{
-                sh"npm install"
-                sh"npm test"
+                dir("chatmanback"){
+                    sh "npm install"
+                    sh "npm test"
+                }
             }
             post {
                 success{
