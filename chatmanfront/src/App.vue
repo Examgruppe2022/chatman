@@ -54,7 +54,7 @@ export default {
 
 <template>
   <PWAPrompt />
-  <Toolbar style="margin: 5px 15px" v-if="true">
+  <Toolbar style="margin: 5px 15px" v-if="showToolBar">
     <template #start>
       <div id="img_reroute" @click="$router.push('/')">
         <img src="../src/assets/mini-logov2.png" width="46" height="46" />

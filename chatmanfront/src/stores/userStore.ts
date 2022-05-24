@@ -82,8 +82,13 @@ export const UserStore = defineStore({
       return res
     },
 
-    acceptFriendRequest(){
-      
+    acceptFriendRequest(receiver: string, sender: string){
+      const res =  userService.acceptFriendRequest(receiver, sender)
+    },
+    sendFriendRequest(receiver: string, sender: string){
+    userService.sendFriendRequest(receiver, sender)
+      .then(r => {return r})
+      .catch((err) => console.log(err))
     }
   },
 });

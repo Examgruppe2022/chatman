@@ -71,4 +71,12 @@ export class UserService {
   }
 
 
+  async acceptFriendRequest(receiver: string, sender: string) {
+    await http.post("/friend-requests/acceptRequest")
+  }
+
+  async sendFriendRequest(receiver: string, sender: string) {
+    await http.post("/friend-requests/sendRequest'")
+    return "sent"
+  }
 }
