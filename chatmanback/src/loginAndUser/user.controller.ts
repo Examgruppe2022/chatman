@@ -19,19 +19,19 @@ export class UserController {
     return this.userService.getAllExceptMe(myUsername.text);
   }
 
-  @UseGuards(JwtAuthGuard)
+
   @Post('/getMe')
   getMe(@Body() login: LoginDto) {
     return this.userService.getMe(login.username);
   }
 
-  @UseGuards(JwtAuthGuard)
+
   @Post('/friends')
   getFriends(@Body() username: StringDto) {
     return this.userService.getFriends(username.text);
   }
 
-  @UseGuards(JwtAuthGuard)
+
   @Post('/getNonFriends')
   async getNonFriends(@Body() username: TwoStringDto) {
     const returnData = await this.userService.getNonFriends(
