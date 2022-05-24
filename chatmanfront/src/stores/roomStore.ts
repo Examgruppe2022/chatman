@@ -7,13 +7,21 @@ const roomService = new RoomService();
 export const RoomStore = defineStore({
   id: "RoomStore",
   state: () => ({
-    myRooms:[{roomname: "please refresh"}],
-    accessibleRooms:[{roomaname:"please"}],
+    myRooms:[{roomName: "please refresh"}],
+    accessibleRooms:[{roomName:"please"}],
   }),
   getters: {},
 
   actions: {
-    
+
+    findMyRooms(){
+      roomService
+        .findMyRooms("first")
+        .then((rooms) => (this.myRooms = rooms))
+        .catch((err) => console.log(err))
+      console.log(this.myRooms)
+    }
+
   }
 })
 

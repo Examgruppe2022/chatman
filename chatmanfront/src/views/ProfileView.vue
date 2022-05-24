@@ -28,8 +28,9 @@
             <SplitterPanel class="flex align-items-center justify-content-center" :size="80">
               <br>
               <div class="div_right_bottom">
-                <h5>Your Chats</h5>
-                <Listbox v-model="chatList" :options="chat" optionLabel="name" style="width:15rem" />
+                <h5>Your ChatRooms</h5>
+                <Listbox v-model="chatRoomList" :options="this.roomStore.myRooms" optionLabel="roomName" style="width:15rem" />
+                <Button @click="refresh2"> Refresh</Button>
               </div>
             </SplitterPanel>
           </Splitter>
@@ -41,11 +42,16 @@
 
 <script setup lang="ts" >
  import { UserStore } from "@/stores/userStore";
+ import { RoomStore } from "@/stores/roomStore";
 
  const userStore = UserStore();
+ const roomStore= RoomStore();
 
  function refresh(){
    userStore.findMyFriends();
+ }
+ function refresh2(){
+   roomStore.findMyRooms();
  }
 </script>
 

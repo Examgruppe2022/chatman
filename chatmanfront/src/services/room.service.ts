@@ -19,4 +19,11 @@ export class RoomService {
       roomName: selectedRoomName
     });
   }
+
+   async findMyRooms(username: string): Promise<Room[]> {
+    const res = await http.post<Room[]>("/rooms/ownRoom", {
+      text: username,
+    });
+    return res.data;
+  }
 }

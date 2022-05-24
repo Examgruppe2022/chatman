@@ -17,38 +17,37 @@ import { TwoStringDto } from '../universalDtos/twoString.dto';
 import { IRoomsService } from '../core/Iservices/IRoomsService';
 import { JwtAuthGuard } from '../loginAndUser/Jwt-auth.Guard';
 
-@Controller('rooms')
+@Controller('/rooms')
 export class RoomsController {
   constructor(
     @Inject('IRoomService') private readonly roomsService: IRoomsService,
   ) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post('createRoom')
+  @Post('/createRoom')
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomsService.create(createRoomDto);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Post('ownRoom')
+  @Post('/ownRoom')
   findUsersOwnRooms(@Body() username: StringDto) {
     return this.roomsService.findUsersOwnRooms(username.text);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('allAccessibleRooms')
+  @Post('/allAccessibleRooms')
   findallAccessibleRooms(@Body() username: StringDto) {
     return this.roomsService.findAllAccessibleRooms(username.text);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('friendsRooms')
+  @Post('/friendsRooms')
   findFriendsRooms(@Body() username: StringDto) {
     return this.roomsService.findFriendsRooms(username.text);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('delete')
+  @Post('/delete')
   remove(@Body() roomName: StringDto) {
     return this.roomsService.remove(roomName.text);
   }
