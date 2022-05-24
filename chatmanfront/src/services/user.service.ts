@@ -62,6 +62,13 @@ export class UserService {
       password: password
     });
     localStorage.setItem("returnedUserName", res.data.username)
-    return res.data
+    return res.data;
   }
+
+  async getFriendRequests(loggedinUser: string) {
+    const res = await http.post("/friend-requests/getRequests")
+    return res.data;
+  }
+
+
 }
