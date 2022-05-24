@@ -14,7 +14,7 @@
           <h5 class="w-75 mx-auto">FriendsList</h5>
           <Listbox v-model="FriendsList" :options="this.userStore.friends" optionLabel="username" style="width:15rem; min-height: 300px;" />
           <br>
-          <Button @click="refresh" class="btn"> Refresh</Button>
+          <Button @click="refresh" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
         </div>
       </div>
       <div class="col-3">
@@ -22,7 +22,7 @@
           <h5 class="w-75 mx-auto">ChatRooms</h5>
           <Listbox v-model="chatRoomList" :options="this.roomStore.myRooms" optionLabel="roomName" style="width:15rem; min-height:300px;" />
           <br>
-          <Button @click="refresh2" class="btn"> Refresh</Button>
+          <Button @click="refresh2" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
         </div>
       </div>
         <div class="col-3 knapper">
@@ -50,15 +50,6 @@
 </script>
 
 <style scoped>
-
-.btn {
-  background-color: dimgrey;
-  border: none;
-  color: white;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-}
 .knapper{
   text-align: end;
 }

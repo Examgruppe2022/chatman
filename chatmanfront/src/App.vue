@@ -88,15 +88,6 @@ export default {
 </template>
 
 <style>
-#app {
-  font-family: "Avenir", "Helvetica", "Arial", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: grid;
-  grid-template-rows: 100px 1fr;
-  grid-template-areas: "header" "body";
-  height: 100%;
-}
 
 html,
 body {

@@ -11,7 +11,7 @@
       <h3>Send a Message</h3>
       <InputText v-model="txtChatInput" placeholder="Enter message" />
       <br/>
-      <Button class="p-button-rounded p-button-secondary " @click="sendChat">Send</Button>
+      <Button class="p-button-rounded p-button-secondary p-button-raised " @click="sendChat">Send</Button>
       <br />
       <br />
     </div>

@@ -5,7 +5,7 @@
     <InputText v-model="inputEmail" style="margin-bottom: 10px" placeholder="Enter Email" />
     <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
     <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" />
-    <Button @click="handleCreateUser" class="p-button-rounded p-button-secondary " > Sign up </Button>
+    <Button @click="handleCreateUser" class="btn" > Sign up </Button>
   </div>
 </template>
 
@@ -26,11 +26,21 @@ function handleCreateUser() {
 
 </script>
 <style>
+
 .center_man{
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.btn1 {
+  background-color: dimgrey;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>

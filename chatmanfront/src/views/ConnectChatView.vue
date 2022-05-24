@@ -1,21 +1,28 @@
 <template #option="slotProps">
-  <Listbox
-    v-model="selectAccessibleRooms"
-    :options="this.roomStore.accessibleRooms"
-    :multiple="false"
-    :filter="true"
-    optionLabel="roomName"
-    listStyle="max-height:500px"
-    style="width: 15rem"
-    filterPlaceholder="Search"
-  >
-    <div class="friend-item">
-      <div>{{ slotProps.option.roomName() }}</div>
-    </div>
-  </Listbox>
-  <Button @click="refresh" class="p-button-raised p-button-secondary" icon="pi pi-refresh">Refresh</Button>
-  <Button @click="connectToChatRoom" > Connect</Button>
+<div class="row ms-3 mt-3">
+  <div class="col-2">
+    <Listbox
+      v-model="selectAccessibleRooms"
+      :options="this.roomStore.accessibleRooms"
+      :multiple="false"
+      :filter="true"
+      optionLabel="roomName"
+      listStyle="max-height:500px"
+      style="width: 15rem"
+      filterPlaceholder="Search">
+      <div class="friend-item">
+        <div>{{ slotProps.option.roomName() }}</div>
+      </div>
+    </Listbox>
+  </div>
+  <div class="col-2">
+    <Button @click="refresh" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
+ <br>
+    <br>
+    <Button @click="connectToChatRoom" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-check-circle" label="Connect"></Button>
+  </div>
 
+</div>
 </template>
 
 <script setup lang="ts">
