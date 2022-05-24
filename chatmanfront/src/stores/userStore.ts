@@ -9,15 +9,19 @@ export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
     loggedInUser: undefined as User | undefined,
-    users:[{ name:" testuser1"}, {name: "testuser2"}],
+    users:[{ username:" Please Refresh"}],
+    friends:[{ username:" Please Refresh"}],
     userInfo:{
-      name:"",
+      _id:"",
       username:"",
+      email: "",
+      password: "",
+      friends:[""],
     }
   }),
   getters: {
     userName: (state) => {
-      if (state.loggedInUser) return state.loggedInUser.name;
+      if (state.loggedInUser) return state.loggedInUser.username;
       return "";
     },
     isLoggedIn: (state) => {
@@ -25,9 +29,9 @@ export const UserStore = defineStore({
     },
   },
   actions: {
-    createUser(name: string, email: string, password: string) {
+    createUser(username: string, email: string, password: string) {
       userService
-        .createUser(name, email, password)
+        .createUser(username, email, password)
         .then((user) => {
           this.loggedInUser = user;
         })
@@ -37,13 +41,22 @@ export const UserStore = defineStore({
       this.loggedInUser = undefined;
     },
 
-    findFriends(search: string) {
+    findNonFriends(search: string) {
       userService
-        .findFriends(search)
+        .findNonFriends(search)
         .then((friends) => (this.users = friends))
         .catch((err) => console.log(err))
       console.log('test');
       console.log(this.users);
+    },
+
+    findMyFriends() {
+      userService
+        .findMyFriends("first")
+        .then((friends) => (this.friends = friends))
+        .catch((err) => console.log(err))
+      console.log('test my friends');
+      console.log(this.friends);
     },
 
     getUserInfo(search: string){
@@ -60,12 +73,7 @@ export const UserStore = defineStore({
           this.loggedInUser = user;
         })
         .catch((err) => console.log(err));
-      this.loggedInUser = {
-        username: username,
-        password: password,
-        uuid: "5f144613-fc1b-4ee0-98e7-a171b7c94b2d",
-        name: "",
-      };
+
       /*
       userService
         .loginUser(username,password)

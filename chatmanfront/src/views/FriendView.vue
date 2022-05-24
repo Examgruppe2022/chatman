@@ -2,22 +2,19 @@
 <template #option="slotProps">
   <Listbox
     v-model="selectedFriends"
-    :options="name"
+    :options="this.userStore.users"
     :multiple="true"
     :filter="true"
-    optionLabel="Username"
-    listStyle="max-height:250px"
+    optionLabel="username"
+    listStyle="max-height:500px"
     style="width: 15rem"
     filterPlaceholder="Search"
   >
-    <li v-for="(user, index) in userStore.users" v-bind:key="index">
-      {{user.name}}
-    </li>
     <div class="friend-item">
-      <div>{{ slotProps.option.name }}</div>
+      <div>{{ slotProps.option.username }}</div>
     </div>
   </Listbox>
-  <Button @click="searchFriend">Search</Button>
+  <Button @click="searchFriend" class="p-button-raised p-button-secondary" icon="pi pi-refresh">Refresh</Button>
 </template>
 
 <script setup lang="ts">
@@ -30,7 +27,7 @@ const search = ref("");
 const infoSearch = ref("");
 
 function searchFriend(){
-  userStore.findFriends(search.value);
+  userStore.findNonFriends(search.value);
 }
 function getInfo(){
   userStore.getUserInfo(infoSearch.value);

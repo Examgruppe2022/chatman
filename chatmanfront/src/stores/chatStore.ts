@@ -7,6 +7,8 @@ const chatService = new ChatService();
 export const ChatStore = defineStore({
   id: "ChatStore",
   state: () => ({
+    chatRooms:[{ username:" Please Refresh"}],
+    yourChatRooms:[{ username:" Please Refresh"}],
     chats: [
       { text: "USERNAME", sender: "MESSAGE" },
       { text: "second", sender: "tester 2" },
@@ -33,6 +35,7 @@ export const ChatStore = defineStore({
         this.chats.push(chat);
       });
     },
+
   },
 });
 

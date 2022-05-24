@@ -1,5 +1,6 @@
 import http from "./http.client";
 import type { User } from "@/models/User";
+import type { Key } from "readline";
 
 export class UserService {
   async createUser(
@@ -30,7 +31,7 @@ export class UserService {
     await http.get("auth/user")
   }
 
-  async findFriends(search:string): Promise<User[]> {
+  async findNonFriends(search:string): Promise<User[]> {
     const res = await http.post<User[]>("/user/getNonFriends",{
      firstString: "first",
       secondString:"",
@@ -45,5 +46,13 @@ export class UserService {
       password:"",
     });
     return res.data;
+  }
+
+  async findMyFriends(username: string): Promise<User[]> {
+    const res = await http.post<User[]>("/user/friends", {
+      text: "first",
+    });
+    return res.data;
+
   }
 }

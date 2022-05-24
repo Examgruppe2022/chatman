@@ -21,7 +21,8 @@
              <br>
               <div class="div_right_middle">
                 <h5>Friend List</h5>
-                <Listbox v-model="FriendList" :options="friend" optionLabel="name" style="width:15rem" />
+                <Listbox v-model="FriendsList" :options="this.userStore.friends" optionLabel="username" style="width:15rem" />
+                <Button @click="refresh" > Refresh</Button>
               </div>
             </SplitterPanel>
             <SplitterPanel class="flex align-items-center justify-content-center" :size="80">
@@ -38,10 +39,14 @@
   </Splitter>
 </template>
 
-<script>
-export default {
-  name: "ProfileView.vue"
-};
+<script setup lang="ts" >
+ import { UserStore } from "@/stores/userStore";
+
+ const userStore = UserStore();
+
+ function refresh(){
+   userStore.findMyFriends();
+ }
 </script>
 
 <style scoped>
