@@ -29,11 +29,11 @@ pipeline {
             }
         }
         stage('backend tests') {
-            when{
+                        /*when{
                 anyOf{
                     changeset "chatmanback/**"
                 }
-            }
+            }*/
             steps{
                 sh"npm install"
                 sh"npm test"
