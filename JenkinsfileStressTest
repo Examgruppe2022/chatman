@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    triggers {
+        pollSCM "0 0 * * *"
+    }
+    stages{
+        stage("Stress testing the API") {
+            sh"this will not work if no production containers are running"
+            dir("performance tests") {
+                sh"k6 run -e URL=185.51.76.42:9091 stressTest.js"
+            }
+        }
+    }
+}
