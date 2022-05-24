@@ -2,9 +2,8 @@ import type { Room } from "@/models/Room";
 import http from "./http.client";
 
 export class RoomService {
-
   async createRoom(name: string): Promise<Room> {
-    const res = await http.post<Room>("/rooms", {
+    const res = await http.post<Room>("/rooms/createRoom", {
       name: name,
       username: "first",
     });
@@ -13,5 +12,11 @@ export class RoomService {
     } else {
       throw new Error("");
     }
+  }
+
+  async removeRoom(selectedRoomName: string) {
+    await http.post("/rooms/delete",{
+      roomName: selectedRoomName
+    });
   }
 }
