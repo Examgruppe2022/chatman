@@ -29,13 +29,16 @@ pipeline {
             }
         }
         stage('backend tests') {
-            when{
+                        /*when{
                 anyOf{
                     changeset "chatmanback/**"
                 }
-            }
+            }*/
             steps{
-                sh"echo 'TBD: this should run all tests in the (domain.test) folder'"
+                dir("chatmanback"){
+                    sh "npm install"
+                    sh "npm test"
+                }
             }
             post {
                 success{
