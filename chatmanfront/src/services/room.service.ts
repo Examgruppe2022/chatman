@@ -4,8 +4,8 @@ import http from "./http.client";
 export class RoomService {
   async createRoom(name: string): Promise<Room> {
     const res = await http.post<Room>("/rooms/createRoom", {
-      name: name,
-      username: "first",
+      roomName: name,
+      roomCreator: "first",
     });
     if (res.data) {
       return res.data;

@@ -13,7 +13,9 @@ export const RoomStore = defineStore({
   getters: {},
 
   actions: {
-    
+    createRoom(name: string){
+      roomService.createRoom(name)
+    }
   }
 })
 
