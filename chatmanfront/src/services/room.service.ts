@@ -26,4 +26,12 @@ export class RoomService {
     });
     return res.data;
   }
+
+  async getAccessibleRoom(username: string) :Promise<Room[]> {
+    const res = await http.post<Room[]>("/rooms/allAccessibleRooms",{
+      text: username,
+    });
+    return res.data;
+
+  }
 }

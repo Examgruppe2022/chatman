@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import  type { Chat } from "@/models/Chat"
+import http from "./http.client";
 
 export class ChatService {
   socket = io("localhost:80");
@@ -23,5 +24,12 @@ export class ChatService {
 
   disconnectFromRoom(room: string) {
     this.socket.off(room);
+  }
+
+  async getOldMessage(room: string): Promise<Chat[]> {
+    const res = await http.post<Chat[]>("/chat/chatFromRoom", {
+      text: room,
+    });
+    return res.data;
   }
 }

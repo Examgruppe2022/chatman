@@ -19,6 +19,7 @@
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
+import router from "@/router";
 
 
 const userStore = UserStore();
@@ -27,6 +28,7 @@ const inputPassword = ref("");
 
 function handleLoginUser() {
   userStore.loginUser(inputUsername.value,inputPassword.value);
+  router.push("/profile");
 }
 
 </script>

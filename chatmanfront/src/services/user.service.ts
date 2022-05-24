@@ -23,7 +23,7 @@ export class UserService {
       password: password,
     });
     localStorage.setItem("loggedInUserToken", JSON.stringify(res.data));
-    return res.data;
+    return this.getMe(username,password);
   }
 
   async getUser(token: string){
@@ -54,5 +54,14 @@ export class UserService {
     });
     return res.data;
 
+  }
+
+  async getMe(username: string, password: string): Promise<User> {
+    const res = await http.post("/user/getMe", {
+      username: username,
+      password: password
+    });
+    localStorage.setItem("returnedUserName", res.data.username)
+    return res.data
   }
 }

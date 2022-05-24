@@ -14,13 +14,13 @@ import { UpdateChatDto } from './dto/update-chat.dto';
 import { StringDto } from '../universalDtos/string.dto';
 import { IChatsService } from '../core/Iservices/IChatsService';
 
-@Controller()
+@Controller("/chat")
 export class ChatsController {
   constructor(
     @Inject('IChatsService') private readonly chatService: IChatsService,
   ) {}
 
-  @Post()
+  @Post("/chatFromRoom")
   getChatsFromRoom(@Body() roomName: StringDto) {
     return this.chatService.getChatsFromRoom(roomName.text);
   }

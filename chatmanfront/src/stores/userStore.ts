@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { UserService } from "@/services/user.service";
 import type { User } from "@/models/User";
+import router from "@/router";
 
 
 const userService: UserService = new UserService();
@@ -12,11 +13,7 @@ export const UserStore = defineStore({
     users:[{ username:" Please Refresh"}],
     friends:[{ username:" Please Refresh"}],
     userInfo:{
-      _id:"",
       username:"",
-      email: "",
-      password: "",
-      friends:[""],
     }
   }),
   getters: {
@@ -39,6 +36,8 @@ export const UserStore = defineStore({
     },
     logOut() {
       this.loggedInUser = undefined;
+      localStorage.clear()
+      router.push("/")
     },
 
     findNonFriends(search: string) {
@@ -71,15 +70,11 @@ export const UserStore = defineStore({
         .loginUser(username, password)
         .then((user) => {
           this.loggedInUser = user;
+          console.log(user);
+          console.log(this.loggedInUser);
+          localStorage.setItem("state", JSON.stringify(this.$state))
         })
         .catch((err) => console.log(err));
-
-      /*
-      userService
-        .loginUser(username,password)
-        .then((user) => {this.loggedInUser = user})
-        .catch((err) => console.log(err))
-       */
     },
   },
 });

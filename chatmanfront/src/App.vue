@@ -7,6 +7,7 @@ import App from "./App.vue";
 import { UserStore } from "@/stores/userStore";
 
 import { ref } from "vue";
+import router from "@/router";
 
 export default {
   components: { PWAPrompt },
@@ -23,21 +24,26 @@ export default {
         label: "Create chat",
         icon: "pi pi-plus",
         command: () => {
-          window.location.href = "/createchat";
+          //window.location.href = "/createchat";
+          router.push("/createchat")
         },
       },
       {
         label: "Connect to chat",
         icon: "pi pi-directions",
         command: () => {
-          window.location.href = "ConnectChatView";
+          router.push("/connect")
+          //window.location.href = "ConnectChatView";
+          //window.location.href = "/connect";
+
         },
       },
       {
         label: "Chat Room",
         icon: "pi pi-comments",
         command: () => {
-          window.location.href = "/chat";
+          //window.location.href = "/chat";
+          router.push("/chat");
         },
       },
     ]);

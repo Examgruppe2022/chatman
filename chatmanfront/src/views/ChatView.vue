@@ -1,22 +1,22 @@
 <template>
 
-  <div class="left-man">
-    <div class="top-man">
-  <br />
-      <h3>Send a Message</h3>
-  <InputText v-model="txtChatInput" placeholder="Enter message" />
-      <br/>
-  <Button class="p-button-rounded p-button-secondary " @click="sendChat">Send</Button>
-    <br />
-  <br />
-  </div>
-    </div>
-  <div>
+  <div style="overflow:scroll">
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
       {{ chat.sender }} : {{ chat.text }}
     </li>
+    <Button @click="connectToChatRoom" > Connect</Button>
   </div>
-
+  <div class="left-man">
+    <div class="top-man">
+      <br />
+      <h3>Send a Message</h3>
+      <InputText v-model="txtChatInput" placeholder="Enter message" />
+      <br/>
+      <Button class="p-button-rounded p-button-secondary " @click="sendChat">Send</Button>
+      <br />
+      <br />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -37,10 +37,15 @@ function ListenToRoom() {
 
 function sendChat() {
   chatStore.createChat( {
+    timeStamp: new Date(),
     text: txtChatInput.value,
     room: roomChatInput.value,
     sender: loggedInUserName
   });
+}
+
+function connectToChatRoom(){
+  chatStore.setRoom("firstsroom")
 }
 
 </script>
