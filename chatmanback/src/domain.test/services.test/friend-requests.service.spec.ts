@@ -15,6 +15,7 @@ import { CreateFriendRequestDto } from '../../friend-requests/dto/create-friend-
 //this test class is very broken, trying to mock the db isen't working
 describe('FriendRequestsService', () => {
   let service: FriendRequestsService;
+  jest.setTimeout(50000);
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [MongoDbModule],

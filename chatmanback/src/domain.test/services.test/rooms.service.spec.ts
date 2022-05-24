@@ -7,7 +7,7 @@ import { userProvider } from '../../infrastructure/mongoDB/userProvider';
 
 describe('RoomsService', () => {
   let service: RoomsService;
-
+  jest.setTimeout(50000);
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [MongoDbModule],

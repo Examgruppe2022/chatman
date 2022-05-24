@@ -8,7 +8,7 @@ import { chatProvider } from '../../infrastructure/mongoDB/chatProvider';
 
 describe('ChatsService', () => {
   let service: ChatsService;
-
+  jest.setTimeout(50000);
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [MongoDbModule],

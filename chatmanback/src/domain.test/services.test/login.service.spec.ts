@@ -13,7 +13,7 @@ import { JwtStrategy } from '../../loginAndUser/jwt.strategy';
 
 describe('LoginService', () => {
   let service: LoginService;
-
+  jest.setTimeout(50000);
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
