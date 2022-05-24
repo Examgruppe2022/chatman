@@ -35,7 +35,7 @@ export class FriendRequestsService {
     }
   }
 
-  async getAllMyFriendRequests(username: string) {
+  async getAllMyFriendRequests(username: string): Promise< FriendRequestEntity[]> {
     const friendRequests: FriendRequestEntity[] = [];
     const receivedFriendRequest = await this.friendRequestModel.find({
       receiverUsername: username,

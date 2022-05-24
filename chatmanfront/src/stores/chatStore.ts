@@ -29,7 +29,7 @@ export const ChatStore = defineStore({
         throw new Error('you must be logged in to send a chat message')
       }
       chatService.createChat(chat);
-      this.chats.push(chat);
+      //this.chats.push(chat);
     },
 
     setRoom(room: string){

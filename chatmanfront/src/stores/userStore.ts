@@ -76,5 +76,14 @@ export const UserStore = defineStore({
         })
         .catch((err) => console.log(err));
     },
+
+    getFriendRequest(loggedinUser: string){
+      const res = userService.getFriendRequests(loggedinUser)
+      return res
+    },
+
+    acceptFriendRequest(){
+      
+    }
   },
 });

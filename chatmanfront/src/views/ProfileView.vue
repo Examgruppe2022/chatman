@@ -2,8 +2,8 @@
   <Splitter style="height: 500px">
     <SplitterPanel class="flex align-items-center justify-content-center" :size="20" :minSize="10">
       <div class="div_left">
-        <h5> Anna Teresa Morales
-          username: annamorri
+        <h5>
+
         </h5>
       </div>
     </SplitterPanel>

@@ -19,18 +19,15 @@ export class UserController {
     return this.userService.getAllExceptMe(myUsername.text);
   }
 
-
   @Post('/getMe')
   getMe(@Body() login: LoginDto) {
     return this.userService.getMe(login.username);
   }
 
-
   @Post('/friends')
   getFriends(@Body() username: StringDto) {
     return this.userService.getFriends(username.text);
   }
-
 
   @Post('/getNonFriends')
   async getNonFriends(@Body() username: TwoStringDto) {
