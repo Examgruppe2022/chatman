@@ -66,4 +66,11 @@ export class FriendRequestsService {
       },
     );
   }
+
+  //this method is used to clear the DB during testing, and should therefor not be added to the interface
+  async debugDeleteFriendRequest(reciver: string) {
+    console.log(
+      await this.friendRequestModel.deleteOne({ receiverUsername: 'first' }),
+    );
+  }
 }

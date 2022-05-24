@@ -35,7 +35,7 @@ pipeline {
                 }
             }
             steps{
-                sh"echo 'TBD: this should run all tests in the (domain.test) folder'"
+                sh"npm test"
             }
             post {
                 success{
