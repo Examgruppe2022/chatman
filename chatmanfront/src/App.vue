@@ -32,8 +32,10 @@ export default {
         label: "Connect to chat",
         icon: "pi pi-directions",
         command: () => {
-          router.push("ConnectChatView")
+          router.push("/connect")
           //window.location.href = "ConnectChatView";
+          //window.location.href = "/connect";
+
         },
       },
       {

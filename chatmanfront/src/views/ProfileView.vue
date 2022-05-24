@@ -45,7 +45,7 @@
  import { RoomStore } from "@/stores/roomStore";
 
  const userStore = UserStore();
- const roomStore= RoomStore();
+ const roomStore = RoomStore();
 
  function refresh(){
    userStore.findMyFriends();

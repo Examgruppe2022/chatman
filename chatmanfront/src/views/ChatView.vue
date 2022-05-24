@@ -4,6 +4,7 @@
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
       {{ chat.sender }} : {{ chat.text }}
     </li>
+    <Button @click="connectToChatRoom" > Connect</Button>
   </div>
   <div class="left-man">
     <div class="top-man">
@@ -36,10 +37,15 @@ function ListenToRoom() {
 
 function sendChat() {
   chatStore.createChat( {
+    timeStamp: new Date(),
     text: txtChatInput.value,
     room: roomChatInput.value,
     sender: loggedInUserName
   });
+}
+
+function connectToChatRoom(){
+  chatStore.setRoom("firstsroom")
 }
 
 </script>

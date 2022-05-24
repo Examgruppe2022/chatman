@@ -36,8 +36,8 @@ const router = createRouter({
       component: CreateUserView,
     },
     {
-      path: "/chatroom",
-      name: "chatroom",
+      path: "/connect",
+      name: "connect",
       component: ConnectChatView,
     },
     {

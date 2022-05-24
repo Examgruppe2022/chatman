@@ -13,6 +13,9 @@ export const RoomStore = defineStore({
   getters: {},
 
   actions: {
+    createRoom (name: string){
+      roomService.createRoom(name)
+    },
 
     findMyRooms(){
       roomService
@@ -22,9 +25,13 @@ export const RoomStore = defineStore({
       console.log(this.myRooms)
     },
 
-    createRoom (name: string){
-      roomService.createRoom(name)
-    }
+    getAccessibleRoom(){
+      roomService
+        .getAccessibleRoom("first")
+        .then((rooms) => (this.accessibleRooms=rooms))
+        .catch((err) => console.log(err))
+      console.log(this.accessibleRooms)
+    },
   }
 })
 
