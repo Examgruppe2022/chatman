@@ -6,7 +6,7 @@ export class RoomService {
   async createRoom(name: string): Promise<Room> {
     const res = await http.post<Room>("/rooms", {
       name: name,
-      username: "rasmus",
+      username: "first",
     });
     if (res.data) {
       return res.data;

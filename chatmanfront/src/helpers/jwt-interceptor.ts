@@ -1,18 +1,17 @@
 import axios from 'axios';
 
-import { accountService } from '@/services/user.service';
 
 export function jwtInterceptor() {
-  axios.interceptors.request.use(request => {
+  axios.interceptors.request.use((request) => {
     // add auth header with jwt if account is logged in and request is to the api url
-    const account = accountService.accountValue;
-    const isLoggedIn = account?.token;
+  if (request != undefined) {
+    const token = localStorage.getItem("loggedInUserToken");
     const isApiUrl = request.url.startsWith(process.env.VUE_APP_API_URL);
 
-    if (isLoggedIn && isApiUrl) {
-      request.headers.common.Authorization = `Bearer ${account.token}`;
+    if (token && isApiUrl) {
+        request.headers.common.Authorization = `Bearer ${token}`;
     }
-
+  }
     return request;
   });
 }
