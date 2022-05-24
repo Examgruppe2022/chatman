@@ -39,4 +39,12 @@ function handleCreateRoom() {
   justify-content: left;
 }
 
+.right-girl{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: right;
+}
+
 </style>

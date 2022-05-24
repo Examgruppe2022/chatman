@@ -19,12 +19,12 @@ import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css";
 import {jwtInterceptor} from "./helpers/jwt-interceptor";
 const app = createApp(App);
-
+jwtInterceptor();
 app.use(PrimeVue);
 app.use(createPinia());
 app.use(router);
 
-jwtInterceptor();
+
 
 app.component(`Dialog`, Dialog);
 app.component(`Button`, Button);
