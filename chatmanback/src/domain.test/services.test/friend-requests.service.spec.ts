@@ -3,7 +3,6 @@ import { FriendRequestsService } from '../../domain/services/friend-requests.ser
 import { Connection, Model, connect } from 'mongoose';
 import { FriendRequestEntity } from '../../core/entities/friend-request.entity';
 import { getModelToken } from '@nestjs/mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import { FriendRequestSchema } from '../../infrastructure/mongoDB/friendrequestSchema';
 import { MongoDbModule } from '../../infrastructure/mongoDB/mongoDB.module';
 import { UserEntity } from '../../core/entities/User.Entity';
@@ -16,10 +15,6 @@ import { CreateFriendRequestDto } from '../../friend-requests/dto/create-friend-
 //this test class is very broken, trying to mock the db isen't working
 describe('FriendRequestsService', () => {
   let service: FriendRequestsService;
-  let mongod: MongoMemoryServer;
-  let mongoConnection: Connection;
-  let mockFRModel: Model<FriendRequestEntity>;
-  let mockUserModel: Model<UserEntity>;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [MongoDbModule],
