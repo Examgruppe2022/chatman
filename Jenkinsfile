@@ -9,11 +9,11 @@ pipeline {
 
     stages{
         stage('building: backend') {
-            when{
+            /*when{
                 anyOf{
                     changeset "chatmanback/**"
                 }
-            }
+            }*/
             steps{
                 sh "echo '[BackEnd] is building...'"
                 dir("chatmanback"){
@@ -47,11 +47,11 @@ pipeline {
             }
         }
         stage('building: frontend') {
-            when{
+            /*when{
                 anyOf{
                     changeset "chatmanfront/**"
                 }
-            }
+            }*/
             steps{
                 sh"echo '[Frontend] is building...'"
                 dir("chatmanfront"){
