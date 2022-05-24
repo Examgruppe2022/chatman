@@ -2,7 +2,7 @@
 <template #option="slotProps">
   <Listbox
     v-model="selectedFriends"
-    :options="this.userStore.users"
+    :options="userStore.users"
     :multiple="true"
     :filter="true"
     optionLabel="username"
@@ -11,7 +11,7 @@
     filterPlaceholder="Search"
   >
     <div class="friend-item">
-      <div>{{ slotProps.option.username }}</div>
+
     </div>
   </Listbox>
   <Button @click="searchFriend" class="p-button-raised p-button-secondary" icon="pi pi-refresh">Refresh</Button>
@@ -25,6 +25,7 @@ import { ref } from "vue";
 const userStore = UserStore();
 const search = ref("");
 const infoSearch = ref("");
+const selectedFriends = "debug";
 
 function searchFriend(){
   userStore.findNonFriends(search.value);
