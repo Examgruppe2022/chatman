@@ -23,6 +23,7 @@ export const ChatStore = defineStore({
   },
   actions: {
     createChat(chat: Chat){
+      chat.timeStamp = new Date();
       chatService.createChat(chat);
       this.chats.push(chat);
     },

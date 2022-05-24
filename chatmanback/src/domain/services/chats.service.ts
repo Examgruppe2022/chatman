@@ -17,7 +17,7 @@ export class ChatsService {
       text: chat.text,
       sender: chat.sender,
       room: chat.room,
-      timeStamp: chat.timeStamp,
+      timeStamp: new Date(),
     });
     return newChat.save();
   }
