@@ -2,9 +2,11 @@
   <Splitter style="height: 500px">
     <SplitterPanel class="flex align-items-center justify-content-center" :size="20" :minSize="10">
       <div class="div_left">
-        <h5>
-
-        </h5>
+        <h5 style="font-size: 20px">Welcome Back </h5>
+        <br>
+        <h5 style="font-size: 20px">Username: </h5>
+        <br>
+        <h5 style="font-size: 20px">Email: </h5>
       </div>
     </SplitterPanel>
     <SplitterPanel :size="80">
@@ -47,12 +49,14 @@
  const userStore = UserStore();
  const roomStore = RoomStore();
 
+
  function refresh(){
    userStore.findMyFriends();
  }
  function refresh2(){
    roomStore.findMyRooms();
  }
+
 </script>
 
 <style scoped>
