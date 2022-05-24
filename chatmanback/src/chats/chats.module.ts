@@ -4,9 +4,11 @@ import { ChatsGateway } from './chats.gateway';
 import { roomProvider } from '../infrastructure/mongoDB/roomProvider';
 import { chatProvider } from '../infrastructure/mongoDB/chatProvider';
 import { MongoDbModule } from '../infrastructure/mongoDB/mongoDB.module';
+import { ChatsController } from "./chats.controller";
 
 @Module({
   imports: [MongoDbModule],
+  controllers: [ChatsController],
   providers: [
     {
       provide: 'IChatsService',

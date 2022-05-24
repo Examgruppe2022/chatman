@@ -39,7 +39,6 @@ export class RoomsController {
     return this.roomsService.findUsersOwnRooms(username.text);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('/allAccessibleRooms')
   findallAccessibleRooms(@Body() username: StringDto) {
     return this.roomsService.findAllAccessibleRooms(username.text);

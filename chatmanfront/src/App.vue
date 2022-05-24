@@ -30,7 +30,7 @@ export default {
         label: "Connect to chat",
         icon: "pi pi-directions",
         command: () => {
-          window.location.href = "ConnectChatView";
+          window.location.href = "/connect";
         },
       },
       {
