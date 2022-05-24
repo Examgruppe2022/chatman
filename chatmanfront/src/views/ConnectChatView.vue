@@ -23,6 +23,7 @@
 import { RoomStore } from "@/stores/roomStore";
 import { ChatStore } from "@/stores/chatStore";
 import type { Room } from "@/models/Room";
+import router from "@/router";
 
 const roomStore = RoomStore();
 const chatStore = ChatStore();
@@ -34,7 +35,8 @@ function refresh(){
 }
 function connectToChatRoom(){
   chatStore.setRoom("firstsroom")
-  window.location.href =('/chat')
+  router.push('/chat')
+  //window.location.href =('/chat')
 }
 
 </script>
