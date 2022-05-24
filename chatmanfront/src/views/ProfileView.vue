@@ -21,7 +21,7 @@
              <br>
               <div class="div_right_middle">
                 <h5>Friend List</h5>
-                <Listbox v-model="FriendsList" :options="userStore.friends" optionLabel="username" style="width:15rem" />
+                <Listbox v-model="FriendsList" :options="this.userStore.friends" optionLabel="username" style="width:15rem" />
                 <Button @click="refresh" > Refresh</Button>
               </div>
             </SplitterPanel>
@@ -29,7 +29,7 @@
               <br>
               <div class="div_right_bottom">
                 <h5>Your ChatRooms</h5>
-                <Listbox v-model="chatRoomList" :options="roomStore.myRooms" optionLabel="roomName" style="width:15rem" />
+                <Listbox v-model="chatRoomList" :options="this.roomStore.myRooms" optionLabel="roomName" style="width:15rem" />
                 <Button @click="refresh2"> Refresh</Button>
               </div>
             </SplitterPanel>
@@ -46,8 +46,7 @@
 
  const userStore = UserStore();
  const roomStore = RoomStore();
- const FriendsList = "debug";
- const chatRoomList = "debug";
+
  function refresh(){
    userStore.findMyFriends();
  }

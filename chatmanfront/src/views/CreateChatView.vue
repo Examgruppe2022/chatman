@@ -18,11 +18,8 @@
 import { ref } from "vue";
 import { RoomService } from "@/services/room.service";
 
-
 const inputRoomName = ref("");
 const roomService = new RoomService();
-const ChatList = "debug";
-const chatroom = await roomService.findMyRooms("first");
 
 function handleCreateRoom() {
   roomService.createRoom(inputRoomName.value);

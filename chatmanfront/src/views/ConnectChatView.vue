@@ -1,7 +1,7 @@
 <template #option="slotProps">
   <Listbox
     v-model="selectAccessibleRooms"
-    :options="roomStore.accessibleRooms"
+    :options="this.roomStore.accessibleRooms"
     :multiple="false"
     :filter="true"
     optionLabel="roomName"
@@ -10,7 +10,7 @@
     filterPlaceholder="Search"
   >
     <div class="friend-item">
-
+      <div>{{ slotProps.option.roomName() }}</div>
     </div>
   </Listbox>
   <Button @click="refresh" class="p-button-raised p-button-secondary" icon="pi pi-refresh">Refresh</Button>
