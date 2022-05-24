@@ -4,7 +4,6 @@
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
       {{ chat.sender }} : {{ chat.text }} : {{chat.timeStamp}}
     </li>
-    <Button @click="connectToChatRoom" > Connect</Button>
   </div>
   <div class="left-man">
     <div class="top-man">

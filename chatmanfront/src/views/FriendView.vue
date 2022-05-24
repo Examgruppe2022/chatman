@@ -1,4 +1,3 @@
--
 <template #option="slotProps">
   <Listbox
     v-model="selectedFriends"
@@ -14,7 +13,8 @@
       <div>{{ slotProps.option.username }}</div>
     </div>
   </Listbox>
-  <Button @click="searchFriend" class="p-button-raised p-button-secondary" icon="pi pi-refresh">Refresh</Button>
+  <br>
+    <Button @click="searchFriend" class="p-button-raised p-button-secondary" icon="pi pi-refresh">Refresh</Button>
 </template>
 
 <script setup lang="ts">

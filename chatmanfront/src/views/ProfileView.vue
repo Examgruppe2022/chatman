@@ -1,46 +1,36 @@
-<template>
-  <Splitter style="height: 500px">
-    <SplitterPanel class="flex align-items-center justify-content-center" :size="20" :minSize="10">
-      <div class="div_left">
-        <h5 style="font-size: 20px">Welcome Back </h5>
-        <br>
-        <h5 style="font-size: 20px">Username: </h5>
-        <br>
-        <h5 style="font-size: 20px">Email: </h5>
+  <template>
+    <div class="row mt-3 ms-3 me-3">
+      <div class="col-3 bg-light">
+        <div class="w-75 mx-auto">
+          <h5 style="font-size: 20px" class="mx-auto w-50"> YOUR PROFILE </h5>
+          <br>
+          <h5 style="font-size: 18px">Username: </h5>
+          <br>
+          <h5 style="font-size: 18px">Email: </h5>
+        </div>
       </div>
-    </SplitterPanel>
-    <SplitterPanel :size="80">
-      <Splitter layout="vertical">
-        <SplitterPanel class="flex align-items-center justify-content-center" :size="15">
-          <div class="div_right_top">
-            <i class="pi pi-bell mr-4 p-text-secondary" style="font-size: 2rem" v-badge="2"></i> &nbsp;&nbsp;&nbsp;&nbsp;
-            <i class="pi pi-envelope p-text-secondary" style="font-size: 2rem" v-badge.danger></i>&nbsp;&nbsp;
-          </div>
-        </SplitterPanel>
-        <SplitterPanel :size="85">
-          <Splitter>
-            <SplitterPanel class="flex align-items-center justify-content-center" :size="20">
-             <br>
-              <div class="div_right_middle">
-                <h5>Friend List</h5>
-                <Listbox v-model="FriendsList" :options="this.userStore.friends" optionLabel="username" style="width:15rem" />
-                <Button @click="refresh" > Refresh</Button>
-              </div>
-            </SplitterPanel>
-            <SplitterPanel class="flex align-items-center justify-content-center" :size="80">
-              <br>
-              <div class="div_right_bottom">
-                <h5>Your ChatRooms</h5>
-                <Listbox v-model="chatRoomList" :options="this.roomStore.myRooms" optionLabel="roomName" style="width:15rem" />
-                <Button @click="refresh2"> Refresh</Button>
-              </div>
-            </SplitterPanel>
-          </Splitter>
-        </SplitterPanel>
-      </Splitter>
-    </SplitterPanel>
-  </Splitter>
-</template>
+      <div class="col-3">
+        <div class="div_right_middle">
+          <h5 class="w-75 mx-auto">FriendsList</h5>
+          <Listbox v-model="FriendsList" :options="this.userStore.friends" optionLabel="username" style="width:15rem; min-height: 300px;" />
+          <br>
+          <Button @click="refresh" class="btn"> Refresh</Button>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="div_right_middle">
+          <h5 class="w-75 mx-auto">ChatRooms</h5>
+          <Listbox v-model="chatRoomList" :options="this.roomStore.myRooms" optionLabel="roomName" style="width:15rem; min-height:300px;" />
+          <br>
+          <Button @click="refresh2" class="btn"> Refresh</Button>
+        </div>
+      </div>
+        <div class="col-3 knapper">
+          <i class="pi pi-bell mr-4 p-text-secondary" style="font-size: 2rem" v-badge="2"></i> &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="pi pi-envelope p-text-secondary" style="font-size: 2rem" v-badge.danger></i>&nbsp;&nbsp;
+        </div>
+    </div>
+  </template>
 
 <script setup lang="ts" >
  import { UserStore } from "@/stores/userStore";
@@ -61,27 +51,15 @@
 
 <style scoped>
 
-.div_right_middle{
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:right;
+.btn {
+  background-color: dimgrey;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
 }
-.div_right_bottom{
-  height: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:right;
+.knapper{
+  text-align: end;
 }
-
-.div_right_top{
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content:right;
-}
-
 </style>
