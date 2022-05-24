@@ -10,8 +10,8 @@ export const ChatStore = defineStore({
     chatRooms:[{ username:" Please Refresh"}],
     yourChatRooms:[{ username:" Please Refresh"}],
     chats: [
-      { text: "USERNAME", sender: "MESSAGE" },
-      { text: "second", sender: "tester 2" },
+      { text: "USERNAME", sender: "MESSAGE", timeStamp: new Date() },
+      { text: "second", sender: "tester 2", timeStamp: new Date() },
     ],
     room: "",
   }),

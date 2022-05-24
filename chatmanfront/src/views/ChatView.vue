@@ -2,7 +2,7 @@
 
   <div style="overflow:scroll">
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
-      {{ chat.sender }} : {{ chat.text }}
+      {{ chat.sender }} : {{ chat.text }} : {{chat.timeStamp.getHours()}}h:{{chat.timeStamp.getMinutes()}}m - {{chat.timeStamp.getDate()}}/{{chat.timeStamp.getMonth()}}/{{chat.timeStamp.getFullYear()}}
     </li>
     <Button @click="connectToChatRoom" > Connect</Button>
   </div>
