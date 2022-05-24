@@ -24,6 +24,9 @@ export const ChatStore = defineStore({
   actions: {
     createChat(chat: Chat){
       chat.timeStamp = new Date();
+      if(chat.sender == "") {
+        throw new Error('you must be logged in to send a chat message')
+      }
       chatService.createChat(chat);
       this.chats.push(chat);
     },
