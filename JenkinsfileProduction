@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage('Production deployment') {
+            step {
+                sh"docker-compose --env-file ./config/Prod.env up -d"
+            }
+        }
+    }
+}
