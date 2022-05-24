@@ -20,8 +20,11 @@ export const RoomStore = defineStore({
         .then((rooms) => (this.myRooms = rooms))
         .catch((err) => console.log(err))
       console.log(this.myRooms)
-    }
+    },
 
+    createRoom (name: string){
+      roomService.createRoom(name)
+    }
   }
 })
 

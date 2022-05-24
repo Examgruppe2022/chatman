@@ -23,8 +23,13 @@ export class RoomsController {
     @Inject('IRoomService') private readonly roomsService: IRoomsService,
   ) {}
 
+
   @UseGuards(JwtAuthGuard)
   @Post('/createRoom')
+
+
+  @Post('createRoom')
+
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomsService.create(createRoomDto);
   }

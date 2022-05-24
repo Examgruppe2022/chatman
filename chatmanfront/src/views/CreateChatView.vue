@@ -4,7 +4,7 @@
     <h5> Create new chat room </h5>
     <InputText v-model="inputRoomName" style="margin-bottom: 10px" placeholder="Enter Room Name"/>
     <br>
-    <Button @click="$router.push('/chat') " class="p-button-secondary p-button-rounded"> Create</Button>
+    <Button @click="handleCreateRoom" class="p-button-secondary p-button-rounded"> Create</Button>
   </div>
   <div class="right-girl">
     <h5>Chat Room List</h5>
@@ -13,19 +13,16 @@
 </template>
 
 
-<script>
+<script setup lang="ts">
 
-export default {
-  name: "CreateChatView.vue"
-};
 import { ref } from "vue";
 import { RoomService } from "@/services/room.service";
 
-const inputName = ref("");
+const inputRoomName = ref("");
 const roomService = new RoomService();
 
 function handleCreateRoom() {
-  roomService.createRoom(inputName.value);
+  roomService.createRoom(inputRoomName.value);
 }
 </script>
 
