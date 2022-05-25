@@ -12,8 +12,8 @@ export const RoomStore = defineStore({
 
   actions: {
     createRoom(name: string, username: string) {
-      roomService.createRoom(name).then(() => {
-        this.findMyRooms(username);
+      roomService.createRoom(name, username).then(() => {
+        this.findMyRooms(name);
       });
     },
 
