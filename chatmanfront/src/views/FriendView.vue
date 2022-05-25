@@ -15,11 +15,16 @@
         </div>
       </Listbox>
     </div>
+      <br>
+      <div class="col-6">
+        <div>
+        <Button @click="searchFriend" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
     <br>
-    <div class="col-6">
-      <Button @click="searchFriend" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
+          <br>
+        <Button @click="friendRequest" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-user plus" label=" Send Friend Request"></Button>
+       </div>
+      </div>
     </div>
-  </div>
 
 
 </template>
@@ -39,6 +44,9 @@ function searchFriend(){
 function getInfo(){
   userStore.getUserInfo(infoSearch.value);
   console.log(userStore.userInfo);
+}
+function friendRequest(){
+
 }
 
 </script>
