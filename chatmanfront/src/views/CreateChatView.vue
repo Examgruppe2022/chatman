@@ -45,7 +45,7 @@ function handleCreateRoom() {
   roomStore.createRoom(inputRoomName.value, userStore.userName);
 }
 function refresh() {
-  roomStore.getAccessibleRoom();
+  roomStore.getAccessibleRoom(userStore.userName);
 }
 </script>
 
