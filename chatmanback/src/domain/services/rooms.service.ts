@@ -14,16 +14,13 @@ export class RoomsService implements IRoomsService {
   ) {}
 
   async create(createRoomDto: CreateRoomDto) {
-    console.log(createRoomDto);
     const newRoom = new this.roomModel({
       roomName: createRoomDto.roomName,
       roomCreator: createRoomDto.roomCreator,
     });
-    console.log(newRoom);
     const creator = await this.userModel.findOne({
       username: newRoom.roomCreator,
     });
-    console.log(creator);
     if (creator) {
       return await newRoom.save();
     } else {

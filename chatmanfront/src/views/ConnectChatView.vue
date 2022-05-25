@@ -53,7 +53,7 @@ function refresh() {
   roomStore.getAccessibleRoom(userStore.userName);
 }
 function connectToChatRoom() {
-  chatStore.setRoom(selectAccessibleRooms.value.username);
+  chatStore.setRoom(selectAccessibleRooms.value.roomName());
   router.push("/chat");
   //window.location.href =('/chat')
 }

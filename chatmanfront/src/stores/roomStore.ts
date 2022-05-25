@@ -26,6 +26,7 @@ export const RoomStore = defineStore({
     },
 
     getAccessibleRoom(username: string) {
+      this.accessibleRooms = [];
       roomService
         .getAccessibleRoom(username)
         .then((rooms) => (this.accessibleRooms = rooms))

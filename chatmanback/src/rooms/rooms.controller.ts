@@ -26,7 +26,6 @@ export class RoomsController {
   //@UseGuards(JwtAuthGuard)
   @Post('/createRoom')
   create(@Body() createRoomDto: CreateRoomDto) {
-    console.log(createRoomDto);
     return this.roomsService.create(createRoomDto);
   }
   //@UseGuards(JwtAuthGuard)
