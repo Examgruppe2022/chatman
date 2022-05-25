@@ -15,9 +15,10 @@ export class RoomsService implements IRoomsService {
 
   async create(createRoomDto: CreateRoomDto) {
     const newRoom = new this.roomModel({
-      roomName: createRoomDto.roomName,
-      roomCreator: createRoomDto.roomCreator,
+      roomName: createRoomDto.roomCreator,
+      roomCreator: createRoomDto.roomName,
     });
+    console.log(newRoom.roomCreator);
     const creator = await this.userModel.findOne({
       username: newRoom.roomCreator,
     });
