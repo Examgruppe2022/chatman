@@ -1,8 +1,7 @@
 <template>
-
-  <div style="overflow:scroll">
+  <div style="overflow: scroll">
     <li v-for="(chat, index) in chatStore.chats" v-bind:key="index">
-      {{ chat.sender }} : {{ chat.text }} : {{chat.timeStamp}}
+      {{ chat.sender }} : {{ chat.text }} : {{ chat.timeStamp }}
     </li>
   </div>
   <div class="left-man">
@@ -10,8 +9,12 @@
       <br />
       <h3>Send a Message</h3>
       <InputText v-model="txtChatInput" placeholder="Enter message" />
-      <br/>
-      <Button class="p-button-rounded p-button-secondary p-button-raised " @click="sendChat">Send</Button>
+      <br />
+      <Button
+        class="p-button-rounded p-button-secondary p-button-raised"
+        @click="sendChat"
+        >Send</Button
+      >
       <br />
       <br />
     </div>
@@ -35,34 +38,32 @@ function ListenToRoom() {
 }
 
 function sendChat() {
-  chatStore.createChat( {
+  chatStore.createChat({
     timeStamp: new Date(),
     text: txtChatInput.value,
     room: roomChatInput.value,
-    sender: loggedInUserName
+    sender: loggedInUserName,
   });
 }
 
-function connectToChatRoom(){
-  chatStore.setRoom("firstsroom")
+function connectToChatRoom() {
+  chatStore.setRoom("firstsroom");
 }
-
 </script>
 
 <style>
-.left-man{
+.left-man {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: left;
 }
-.top-man{
+.top-man {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: left;
 }
-
 </style>

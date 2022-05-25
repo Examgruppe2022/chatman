@@ -1,38 +1,36 @@
 import { defineStore } from "pinia";
 import { RoomService } from "@/services/room.service";
 
-
 const roomService = new RoomService();
 
 export const RoomStore = defineStore({
   id: "RoomStore",
   state: () => ({
-    myRooms:[{roomName: "please refresh"}],
-    accessibleRooms:[{roomName:"please"}],
+    myRooms: [{ roomName: "please refresh" }],
+    accessibleRooms: [{ roomName: "please" }],
   }),
-  getters: {},
 
   actions: {
-    createRoom (name: string){
-      roomService.createRoom(name)
+    createRoom(name: string, username: string) {
+      roomService.createRoom(name).then(() => {
+        this.findMyRooms(username);
+      });
     },
 
-    findMyRooms(){
+    findMyRooms(username: string) {
       roomService
-        .findMyRooms("first")
+        .findMyRooms(username)
         .then((rooms) => (this.myRooms = rooms))
-        .catch((err) => console.log(err))
-      console.log(this.myRooms)
+        .catch((err) => console.log(err));
+      console.log(this.myRooms);
     },
 
-    getAccessibleRoom(){
+    getAccessibleRoom(username: string) {
       roomService
-        .getAccessibleRoom("first")
-        .then((rooms) => (this.accessibleRooms=rooms))
-        .catch((err) => console.log(err))
-      console.log(this.accessibleRooms)
+        .getAccessibleRoom(username)
+        .then((rooms) => (this.accessibleRooms = rooms))
+        .catch((err) => console.log(err));
+      console.log(this.accessibleRooms);
     },
-  }
-})
-
-
+  },
+});
