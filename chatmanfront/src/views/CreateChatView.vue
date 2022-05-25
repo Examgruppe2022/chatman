@@ -8,7 +8,9 @@
   </div>
   <div class="col-6">
     <h5 class="w-75 mx-auto">Chat Room List</h5>
-    <Listbox v-model="ChatList" :options="chatroom" optionLabel="name" style="width:15rem; min-height: 300px;" />
+    <Listbox v-model="ChatList" :options="this.roomStore.accessibleRooms" optionLabel="roomName" style="width:15rem; min-height: 300px;" />
+    <br>
+    <Button @click="refresh" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
   </div>
 </div>
 </template>
@@ -18,12 +20,17 @@
 
 import { ref } from "vue";
 import { RoomService } from "@/services/room.service";
+import { RoomStore } from "@/stores/roomStore";
 
 const inputRoomName = ref("");
 const roomService = new RoomService();
+const roomStore = RoomStore();
 
 function handleCreateRoom() {
   roomService.createRoom(inputRoomName.value);
+}
+function refresh(){
+  roomStore.getAccessibleRoom();
 }
 </script>
 
