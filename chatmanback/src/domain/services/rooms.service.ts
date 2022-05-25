@@ -21,7 +21,7 @@ export class RoomsService implements IRoomsService {
     console.log('the room name is:' + newRoom.roomCreator);
     console.log('the creator is:' + newRoom.roomName);
     const creator = await this.userModel.findOne({
-      username: newRoom.roomCreator,
+      username: newRoom.roomName,
     });
     if (creator) {
       return await newRoom.save();
