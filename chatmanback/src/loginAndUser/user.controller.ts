@@ -13,7 +13,7 @@ export class UserController {
     @Inject('IUserService') private readonly userService: IUserService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/getAllOtherUsers')
   getAllUsers(@Body() myUsername: StringDto): Promise<UserEntity[]> {
     return this.userService.getAllExceptMe(myUsername.text);
@@ -35,7 +35,6 @@ export class UserController {
       username.firstString,
       username.secondString,
     );
-    console.log(returnData);
     return returnData;
   }
 }

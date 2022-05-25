@@ -37,7 +37,9 @@ export class FriendRequestsService {
     }
   }
 
-  async getAllMyFriendRequests(username: string): Promise< FriendRequestEntity[]> {
+  async getAllMyFriendRequests(
+    username: string,
+  ): Promise<FriendRequestEntity[]> {
     const friendRequests: FriendRequestEntity[] = [];
     const receivedFriendRequest = await this.friendRequestModel.find({
       receiverUsername: username,
@@ -49,14 +51,22 @@ export class FriendRequestsService {
     return friendRequests;
   }
 
-  acceptFriendRequest(accept: CreateFriendRequestDto) {
-    this.userModel.findOneAndUpdate(
+  async acceptFriendRequest(accept: CreateFriendRequestDto) {
+    const sender = await this.userModel.findOne({
+      username: accept.senderUsername,
+    });
+    sender.friends.push(accept.receiverUsername);
+    await this.userModel.updateOne(
       { username: accept.senderUsername },
-      { $push: { friends: accept.receiverUsername } },
+      { friends: sender.friends },
     );
-    this.userModel.findOneAndUpdate(
+    const receiver = await this.userModel.findOne({
+      username: accept.receiverUsername,
+    });
+    receiver.friends.push(accept.senderUsername);
+    await this.userModel.updateOne(
       { username: accept.receiverUsername },
-      { $push: { friends: accept.senderUsername } },
+      { friends: receiver.friends },
     );
     return this.friendRequestModel.findOneAndUpdate(
       {

@@ -23,31 +23,29 @@ export class RoomsController {
     @Inject('IRoomService') private readonly roomsService: IRoomsService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/createRoom')
-  @Post('createRoom')
-  @UseGuards(JwtAuthGuard)
   create(@Body() createRoomDto: CreateRoomDto) {
     return this.roomsService.create(createRoomDto);
   }
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/ownRoom')
   findUsersOwnRooms(@Body() username: StringDto) {
     return this.roomsService.findUsersOwnRooms(username.text);
   }
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/allAccessibleRooms')
   findallAccessibleRooms(@Body() username: StringDto) {
     return this.roomsService.findAllAccessibleRooms(username.text);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/friendsRooms')
   findFriendsRooms(@Body() username: StringDto) {
     return this.roomsService.findFriendsRooms(username.text);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/delete')
   remove(@Body() roomName: StringDto) {
     return this.roomsService.remove(roomName.text);

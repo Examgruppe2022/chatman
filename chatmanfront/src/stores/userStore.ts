@@ -3,22 +3,25 @@ import { UserService } from "@/services/user.service";
 import type { User } from "@/models/User";
 import router from "@/router";
 
-
 const userService: UserService = new UserService();
 
 export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
     loggedInUser: undefined as User | undefined,
-    users:[{ username:" Please Refresh"}],
-    friends:[{ username:" Please Refresh"}],
-    userInfo:{
-      username:"",
-    }
+    users: [{ username: " Please Refresh" }],
+    friends: [{ username: " Please Refresh" }],
+    userInfo: {
+      username: "",
+    },
   }),
   getters: {
     userName: (state) => {
       if (state.loggedInUser) return state.loggedInUser.username;
+      return "";
+    },
+    email: (state) => {
+      if (state.loggedInUser) return state.loggedInUser.email;
       return "";
     },
     isLoggedIn: (state) => {
@@ -36,33 +39,33 @@ export const UserStore = defineStore({
     },
     logOut() {
       this.loggedInUser = undefined;
-      localStorage.clear()
-      router.push("/")
+      localStorage.clear();
+      router.push("/");
     },
 
-    findNonFriends(search: string) {
+    findNonFriends() {
       userService
-        .findNonFriends(search)
+        .findNonFriends(this.userName)
         .then((friends) => (this.users = friends))
-        .catch((err) => console.log(err))
-      console.log('test');
+        .catch((err) => console.log(err));
+      console.log("test");
       console.log(this.users);
     },
 
     findMyFriends() {
       userService
-        .findMyFriends("first")
+        .findMyFriends(this.userName)
         .then((friends) => (this.friends = friends))
-        .catch((err) => console.log(err))
-      console.log('test my friends');
+        .catch((err) => console.log(err));
+      console.log("test my friends");
       console.log(this.friends);
     },
 
-    getUserInfo(search: string){
+    getUserInfo(search: string) {
       userService
         .getInfo(search)
         .then((info) => (this.userInfo = info))
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
     },
 
     loginUser(username: string, password: string) {
@@ -72,7 +75,7 @@ export const UserStore = defineStore({
           this.loggedInUser = user;
           console.log(user);
           console.log(this.loggedInUser);
-          localStorage.setItem("state", JSON.stringify(this.$state))
+          localStorage.setItem("state", JSON.stringify(this.$state));
         })
         .catch((err) => console.log(err));
     },

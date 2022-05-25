@@ -7,8 +7,8 @@ const chatService = new ChatService();
 export const ChatStore = defineStore({
   id: "ChatStore",
   state: () => ({
-    chatRooms:[{ username:" Please Refresh"}],
-    yourChatRooms:[{ username:" Please Refresh"}],
+    chatRooms: [{ username: " Please Refresh" }],
+    yourChatRooms: [{ username: " Please Refresh" }],
     chats: [
       { text: "USERNAME", sender: "MESSAGE", timeStamp: new Date() },
       { text: "second", sender: "tester 2", timeStamp: new Date() },
@@ -22,30 +22,29 @@ export const ChatStore = defineStore({
     },
   },
   actions: {
-    createChat(chat: Chat){
+    createChat(chat: Chat) {
       chat.timeStamp = new Date();
       chat.room = this.room;
-      if(chat.sender == "") {
-        throw new Error('you must be logged in to send a chat message')
+      if (chat.sender == "") {
+        throw new Error("you must be logged in to send a chat message");
       }
       chatService.createChat(chat);
       //this.chats.push(chat);
     },
 
-    setRoom(room: string){
+    setRoom(room: string) {
       if (this.room) chatService.disconnectFromRoom(this.room);
       this.room = room;
       this.chats = [];
-      chatService.getOldMessage(room)
+      chatService
+        .getOldMessage(room)
         .then((oldChat) => {
           this.chats = oldChat;
-        }).catch((err) => console.log(err))
-      chatService.listenToRoom(room,(chat) => {
+        })
+        .catch((err) => console.log(err));
+      chatService.listenToRoom(room, (chat) => {
         this.chats.push(chat);
       });
     },
-
   },
 });
-
-

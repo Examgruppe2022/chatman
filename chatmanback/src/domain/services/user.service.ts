@@ -41,12 +41,14 @@ export class UserService implements IUserService {
     const returnList: UserEntity[] = [];
     everyone.forEach(function (user) {
       me.friends.forEach(function (friend) {
-        if (user.username != friend && user.username.includes(search) == true) {
+        if (user.username != friend) {
           returnList.push(user);
         }
       });
+      if (me.friends.length === 0) {
+        returnList.push(user);
+      }
     });
-    console.log(returnList);
     return returnList;
   }
 }

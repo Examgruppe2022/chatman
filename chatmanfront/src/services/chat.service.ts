@@ -1,12 +1,11 @@
 import { io } from "socket.io-client";
-import  type { Chat } from "@/models/Chat"
+import type { Chat } from "@/models/Chat";
 import http from "./http.client";
 
 export class ChatService {
-  socket = io("localhost:80");
+  socket = io("http://185.51.76.42:8091/");
 
   constructor() {
-
     this.socket.on("connect", () => {
       console.log(this.socket.id);
     });

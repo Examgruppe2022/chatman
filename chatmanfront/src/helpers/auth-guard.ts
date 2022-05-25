@@ -1,6 +1,7 @@
-import { accountService } from "@/_services";
+//import { accountService } from "@/_services";
 
 export function authGuard(to, from, next) {
+  /*
   const account = accountService.accountValue;
 
   if (!account) {
@@ -9,4 +10,5 @@ export function authGuard(to, from, next) {
   }
 
   next();
+  */
 }

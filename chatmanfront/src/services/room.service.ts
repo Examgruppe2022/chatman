@@ -14,22 +14,21 @@ export class RoomService {
     }
   }
   async removeRoom(selectedRoomName: string) {
-    await http.post("/rooms/delete",{
-      roomName: selectedRoomName
+    await http.post("/rooms/delete", {
+      roomName: selectedRoomName,
     });
   }
-   async findMyRooms(username: string): Promise<Room[]> {
+  async findMyRooms(username: string): Promise<Room[]> {
     const res = await http.post<Room[]>("/rooms/ownRoom", {
       text: username,
     });
     return res.data;
   }
 
-  async getAccessibleRoom(username: string) :Promise<Room[]> {
-    const res = await http.post<Room[]>("/rooms/allAccessibleRooms",{
+  async getAccessibleRoom(username: string): Promise<Room[]> {
+    const res = await http.post<Room[]>("/rooms/allAccessibleRooms", {
       text: username,
     });
     return res.data;
-
   }
 }

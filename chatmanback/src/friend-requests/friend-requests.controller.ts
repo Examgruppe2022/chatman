@@ -12,20 +12,19 @@ export class FriendRequestsController {
     private readonly friendRequestsService: IFriendRequestService,
   ) {}
 
-
   @Post('/sendRequest')
   sendFriendRequest(@Body() createFriendRequestDto: CreateFriendRequestDto) {
     console.log(createFriendRequestDto);
     return this.friendRequestsService.SendRequest(createFriendRequestDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/getRequests')
   getMyFriendRequests(@Body() username: StringDto) {
     return this.friendRequestsService.getAllMyFriendRequests(username.text);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Post('/acceptRequest')
   acceptFriendRequest(@Body() request: CreateFriendRequestDto) {
     return this.friendRequestsService.acceptFriendRequest(request);

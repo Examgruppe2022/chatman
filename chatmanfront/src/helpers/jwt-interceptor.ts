@@ -1,7 +1,7 @@
 import type { AxiosInstance, AxiosRequestConfig } from "axios";
 
 export function jwtInterceptor(axiosInstance: AxiosInstance) {
-  axiosInstance.interceptors.request.use(
+  /*axiosInstance.interceptors.request.use(
     (request: AxiosRequestConfig) => {
       console.log(request);
       // add auth header with jwt if account is logged in and request is to the api url
@@ -15,5 +15,5 @@ export function jwtInterceptor(axiosInstance: AxiosInstance) {
     (error) => {
       console.log(error);
     }
-  );
+  );*/
 }

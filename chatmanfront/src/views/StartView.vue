@@ -2,17 +2,29 @@
   <main>
     <div>
       <div class="center_man">
-        <img src="../assets/Chatman_Logov3.png" width="600" height="450">
+        <img src="../assets/Chatman_Logov3.png" width="600" height="450" />
       </div>
       <div class="center_man">
-        <InputText v-model="inputUsername" style="margin-bottom: 10px" placeholder="Enter Username" />
-        <InputText type="password" v-model="inputPassword" style="margin-bottom: 10px" placeholder="Enter Password" />
-        <sub @click="$router.push('/createUser')">Create Account</sub> <br>
-        <Button @click="handleLoginUser" class="p-button-rounded p-button-secondary " > Sign in </Button>
+        <InputText
+          v-model="inputUsername"
+          style="margin-bottom: 10px"
+          placeholder="Enter Username"
+        />
+        <InputText
+          type="password"
+          v-model="inputPassword"
+          style="margin-bottom: 10px"
+          placeholder="Enter Password"
+        />
+        <sub @click="$router.push('/createUser')">Create Account</sub> <br />
+        <Button
+          @click="handleLoginUser"
+          class="p-button-rounded p-button-secondary"
+        >
+          Sign in
+        </Button>
       </div>
     </div>
-
-
   </main>
 </template>
 
@@ -21,20 +33,18 @@ import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
 import router from "@/router";
 
-
 const userStore = UserStore();
 const inputUsername = ref("");
 const inputPassword = ref("");
 
 function handleLoginUser() {
-  userStore.loginUser(inputUsername.value,inputPassword.value);
+  userStore.loginUser(inputUsername.value, inputPassword.value);
   router.push("/profile");
 }
-
 </script>
 
 <style>
-.center_man{
+.center_man {
   height: 100%;
   display: flex;
   flex-direction: column;

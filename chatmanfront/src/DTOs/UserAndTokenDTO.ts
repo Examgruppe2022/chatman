@@ -1,6 +1,6 @@
-import { LoginUser } from "@/DTOs/LoginUser";
+import type { LoginUser } from "@/DTOs/LoginUser";
 
-export class UserAndTokenDTO {
+export interface UserAndTokenDTO {
   loginDto: LoginUser;
-  token: {};
+  //token: {};
 }

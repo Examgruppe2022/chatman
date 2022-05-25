@@ -4,7 +4,7 @@
     <div class="col-2">
       <Listbox
         v-model="selectAccessibleRooms"
-        :options="this.roomStore.accessibleRooms"
+        :options="roomStore.accessibleRooms"
         :multiple="false"
         :filter="true"
         optionLabel="roomName"
@@ -41,17 +41,19 @@ import { RoomStore } from "@/stores/roomStore";
 import { ChatStore } from "@/stores/chatStore";
 import router from "@/router";
 import { ref } from "vue";
+import { UserStore } from "@/stores/userStore";
 
 const roomStore = RoomStore();
 const chatStore = ChatStore();
+const userStore = UserStore();
 const selectAccessibleRooms = ref();
 refresh();
 
 function refresh() {
-  roomStore.getAccessibleRoom();
+  roomStore.getAccessibleRoom(userStore.userName);
 }
 function connectToChatRoom() {
-  chatStore.setRoom("firstsroom");
+  chatStore.setRoom(selectAccessibleRooms.value.username);
   router.push("/chat");
   //window.location.href =('/chat')
 }

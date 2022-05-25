@@ -1,4 +1,4 @@
-export class TwoStringDto{
-  firstString: string
-  secondString: string
+export interface TwoStringDto {
+  firstString: string;
+  secondString: string;
 }

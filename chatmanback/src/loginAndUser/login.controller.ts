@@ -25,19 +25,18 @@ export class LoginController {
 
   @Post('/register')
   async create(@Body() registerDTO: RegistrationDto) {
-    console.log(registerDTO);
     this.loginService.create(registerDTO).then((newUser) => {
       return 'user created';
     });
   }
 
-  @UseGuards(LocalAuthGuard)
+  //@UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req) {
-    return this.loginService.login(req.user);
+    return this.loginService.login(req.body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Get('user')
   getUser(@Request() req) {
     return req.user;

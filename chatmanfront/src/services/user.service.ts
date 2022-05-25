@@ -23,48 +23,48 @@ export class UserService {
       username: username,
       password: password,
     });
-    localStorage.setItem("loggedInUserToken", JSON.stringify(res.data.access_token));
-    return this.getMe(username,password);
+    localStorage.setItem(
+      "loggedInUserToken",
+      JSON.stringify(res.data.access_token)
+    );
+    return this.getMe(username, password);
   }
 
-  async getUser(token: string){
-    const res = localStorage.getItem("loggedInUserToken")
-    await http.get("auth/user")
+  async getUser(token: string) {
+    const res = localStorage.getItem("loggedInUserToken");
+    await http.get("auth/user");
   }
 
-  async findNonFriends(search:string): Promise<User[]> {
-    const res = await http.post<User[]>("/user/getNonFriends",{
-     firstString: "first",
-      secondString:"",
+  async findNonFriends(username: string): Promise<User[]> {
+    const res = await http.post<User[]>("/user/getNonFriends", {
+      firstString: username,
+      secondString: "",
     });
-    return res.data
+    return res.data;
   }
 
-  async getInfo(search : string): Promise<User> {
-    const res = await  http.post<User>("/profiles/info", {
+  async getInfo(search: string): Promise<User> {
+    const res = await http.post<User>("/profiles/info", {
       name: search,
-      username:"",
-      password:"",
+      username: "",
+      password: "",
     });
     return res.data;
   }
 
   async findMyFriends(username: string): Promise<User[]> {
     const res = await http.post<User[]>("/user/friends", {
-      text: "first",
+      text: username,
     });
     return res.data;
-
   }
 
   async getMe(username: string, password: string): Promise<User> {
     const res = await http.post("/user/getMe", {
       username: username,
-      password: password
+      password: password,
     });
-    localStorage.setItem("returnedUserName", res.data.username)
+    localStorage.setItem("returnedUserName", res.data.username);
     return res.data;
   }
-
-
 }
