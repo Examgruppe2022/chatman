@@ -20,7 +20,7 @@ pipeline {
                     sh "npm install"
                     sh "npm run build"
                 }
-                sh "docker-compose --env-file config/Prod.env build api"
+                sh "docker-compose --env-file config/Test.env build api"
             }
             post{
                 success{
@@ -60,14 +60,14 @@ pipeline {
                     sh"npm install"
                     sh"npm run build"
                 }
-                sh "docker-compose --env-file config/Prod.env build web"
+                sh "docker-compose --env-file config/Test.env build web"
             }
         }
         stage('reset containers') {
             steps{
                 script{
                     try{
-                        sh "docker-compose --env-file ./config/Prod.env down"
+                        sh "docker-compose --env-file ./config/Test.env down"
                     }
                     finally {}
                 }
@@ -75,12 +75,12 @@ pipeline {
         }
         stage('deployment') {
             steps{
-                sh "docker-compose --env-file ./config/Prod.env up -d"
+                sh "docker-compose --env-file ./config/Test.env up -d"
             }
         }
         stage('push to registry'){
             steps {
-                sh "docker-compose --env-file ./config/Prod.env push"
+                sh "docker-compose --env-file ./config/Test.env push"
             }
         }
 
