@@ -3,7 +3,7 @@ import type { Chat } from "@/models/Chat";
 import http from "./http.client";
 
 export class ChatService {
-  socket = io("http://185.51.76.42:9091/");
+  socket = io("http://185.51.76.42:8091/");
 
   constructor() {
     this.socket.on("connect", () => {
