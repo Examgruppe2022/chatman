@@ -13,13 +13,11 @@ export class RoomService {
       throw new Error("");
     }
   }
-
   async removeRoom(selectedRoomName: string) {
     await http.post("/rooms/delete",{
       roomName: selectedRoomName
     });
   }
-
    async findMyRooms(username: string): Promise<Room[]> {
     const res = await http.post<Room[]>("/rooms/ownRoom", {
       text: username,

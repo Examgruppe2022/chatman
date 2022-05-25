@@ -76,19 +76,5 @@ export const UserStore = defineStore({
         })
         .catch((err) => console.log(err));
     },
-
-    getFriendRequest(loggedinUser: string){
-      const res = userService.getFriendRequests(loggedinUser)
-      return res
-    },
-
-    acceptFriendRequest(receiver: string, sender: string){
-      const res =  userService.acceptFriendRequest(receiver, sender)
-    },
-    sendFriendRequest(receiver: string, sender: string){
-    userService.sendFriendRequest(receiver, sender)
-      .then(r => {return r})
-      .catch((err) => console.log(err))
-    }
   },
 });
