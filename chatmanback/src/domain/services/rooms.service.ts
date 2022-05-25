@@ -14,15 +14,16 @@ export class RoomsService implements IRoomsService {
   ) {}
 
   async create(createRoomDto: CreateRoomDto) {
+    console.log(createRoomDto);
     const newRoom = new this.roomModel({
-      roomName: createRoomDto.roomCreator,
-      roomCreator: createRoomDto.roomName,
+      roomName: createRoomDto.roomName,
+      roomCreator: createRoomDto.roomCreator,
     });
-    console.log('the room name is:' + newRoom.roomCreator);
-    console.log('the creator is:' + newRoom.roomName);
+    console.log(newRoom);
     const creator = await this.userModel.findOne({
-      username: newRoom.roomName,
+      username: newRoom.roomCreator,
     });
+    console.log(creator);
     if (creator) {
       return await newRoom.save();
     } else {
