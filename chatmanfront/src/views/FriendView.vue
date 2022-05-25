@@ -30,25 +30,17 @@
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
-import { FriendRequestService } from "@/services/friendRequest.service";
+
 
 const userStore = UserStore();
 const search = ref("");
 const selectedFriends = ref();
-const confirmation = ref("");
-const friendRequestService: FriendRequestService = new FriendRequestService();
+
 
 function searchFriend() {
   userStore.findNonFriends(search.value);
 }
 function sendFriendRequest(){
-  confirmation.value = "Friend Request sent !";
-  friendRequestService.sendFriendRequest(
-    userStore.loggedInUser._id,
-    userStore.userName,
-    userStore.foundUser._id,
-    false
-  );
 
 }
 </script>
