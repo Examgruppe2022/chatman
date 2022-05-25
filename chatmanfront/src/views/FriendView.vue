@@ -1,4 +1,5 @@
-<template #option="slotProps">
+<template>
+  <!-- #option="slotProps" -->
   <div class="row-12 mt-3 ms-3">
     <div class="col-6">
       <Listbox
@@ -12,7 +13,7 @@
         filterPlaceholder="Search"
       >
         <div class="friend-item">
-          <div>{{ slotProps.option.username }}</div>
+          <!-- <div>{{ slotProps.option.username }}</div> -->
         </div>
       </Listbox>
     </div>
@@ -34,15 +35,10 @@ import { ref } from "vue";
 
 const userStore = UserStore();
 const search = ref("");
-const infoSearch = ref("");
 const selectedFriends = ref();
 
 function searchFriend() {
   userStore.findNonFriends(search.value);
-}
-function getInfo() {
-  userStore.getUserInfo(infoSearch.value);
-  console.log(userStore.userInfo);
 }
 </script>
 <style scoped></style>
