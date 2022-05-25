@@ -78,6 +78,11 @@ pipeline {
                 sh "docker-compose --env-file ./config/Test.env up -d"
             }
         }
+        stage('push to registry'){
+            steps {
+                sh "docker-compose --env-file ./config/Test.env push"
+            }
+        }
 
     }
 }
