@@ -1,6 +1,7 @@
 import http from "./http.client";
 import type { User } from "@/models/User";
 import type { Key } from "readline";
+import type { Login } from "@/DTOs/Login";
 
 export class UserService {
   async createUser(
@@ -18,11 +19,11 @@ export class UserService {
   }
 
   async loginUser(username: string, password: string): Promise<User> {
-    const res = await http.post<User>("auth/login", {
+    const res = await http.post<Login>("auth/login", {
       username: username,
       password: password,
     });
-    localStorage.setItem("loggedInUserToken", JSON.stringify(res.data));
+    localStorage.setItem("loggedInUserToken", JSON.stringify(res.data.access_token));
     return this.getMe(username,password);
   }
 

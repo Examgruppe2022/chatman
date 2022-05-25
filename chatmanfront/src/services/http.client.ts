@@ -1,8 +1,11 @@
 import axios from "axios"
+import {jwtInterceptor} from "@/helpers/jwt-interceptor";
 
-export default axios.create({
+const instance = axios.create({
   baseURL: "http://localhost:80",
   headers: {
     "content-type": "application/json",
   },
 })
+jwtInterceptor(instance);
+export default instance
