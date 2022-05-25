@@ -1,8 +1,18 @@
 pipeline {
     agent any
     stages {
+        stage('reset containers') {
+            steps{
+                script{
+                    try{
+                        sh "docker-compose --env-file ./config/Test.env down"
+                    }
+                    finally {}
+                }
+            }
+        }
         stage('Production deployment') {
-            step {
+            steps {
                 sh"docker-compose --env-file ./config/Prod.env up -d"
             }
         }
