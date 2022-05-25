@@ -26,6 +26,7 @@ export class ChatService {
   }
 
   async getOldMessage(room: string): Promise<Chat[]> {
+    console.log(room);
     const res = await http.post<Chat[]>("/chat/chatFromRoom", {
       text: room,
     });

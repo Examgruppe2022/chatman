@@ -22,6 +22,7 @@ export class ChatsController {
 
   @Post('/chatFromRoom')
   getChatsFromRoom(@Body() roomName: StringDto) {
+    console.log(roomName);
     return this.chatService.getChatsFromRoom(roomName.text);
   }
 }

@@ -33,6 +33,7 @@ export const ChatStore = defineStore({
     },
 
     setRoom(room: string) {
+      console.log(room);
       if (this.room) chatService.disconnectFromRoom(this.room);
       this.room = room;
       this.chats = [];
