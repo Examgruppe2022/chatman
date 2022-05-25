@@ -1,6 +1,6 @@
 export interface FriendRequest {
   _id: string;
-  receiver: string;
-  sender:string;
+  receiverUsername: string;
+  senderUsername:string;
   isAccepted: boolean;
 }

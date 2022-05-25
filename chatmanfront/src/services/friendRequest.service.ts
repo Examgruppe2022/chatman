@@ -8,9 +8,10 @@ export class FriendRequestService {
     receiver: string,
     sender: string,
   ): Promise<FriendRequest> {
-    const res = await http.post<FriendRequest>("/sendRequests", {
-      receiver: receiver,
-      sender: sender,
+    console.log(sender,receiver);
+    const res = await http.post<FriendRequest>("/friend-requests/sendRequest", {
+      receiverUsername: receiver,
+      senderUsername: sender,
     });
       return res.data;
     }

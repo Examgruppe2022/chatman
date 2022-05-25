@@ -4,10 +4,10 @@ import { FriendRequestService } from "@/services/friendRequest.service";
 
 const friendRequestService: FriendRequestService = new FriendRequestService();
 
-export const friendRequestStore = defineStore({
+export const FriendRequestStore = defineStore({
   id:"friendRequestStore",
   state:() => ({
-   myFriendRequest: [{sender: "refresh"}],
+   myFriendRequest: [{senderUsername: "refresh"}],
 
   }),
 

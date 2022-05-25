@@ -12,9 +12,10 @@ export class FriendRequestsController {
     private readonly friendRequestsService: IFriendRequestService,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
+
   @Post('/sendRequest')
   sendFriendRequest(@Body() createFriendRequestDto: CreateFriendRequestDto) {
+    console.log(createFriendRequestDto);
     return this.friendRequestsService.SendRequest(createFriendRequestDto);
   }
 
