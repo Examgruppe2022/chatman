@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Production deployment') {
             steps {
-                sh"docker-compose --env-file ./config/Prod.env up -d"
+                sh"docker-compose --env-file ./config/Test.env up -d"
             }
         }
     }
