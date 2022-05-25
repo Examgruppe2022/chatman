@@ -60,6 +60,15 @@ export default {
         <img src="../src/assets/mini-logov2.png" width="46" height="46" />
         &nbsp; &nbsp; &nbsp;
       </div>
+
+      <Button
+        @click="$router.push('/profile')"
+        label="PROFILE"
+        icon="pi pi-user"
+        class="p-button-rounded p-button-secondary"
+        style="margin-right: 15px"
+      />
+
       <SplitButton
         label="CHAT"
         icon="pi pi-comment"
@@ -75,6 +84,7 @@ export default {
         class="p-button-rounded p-button-secondary"
         style="margin-right: 15px"
       />
+
     </template>
     <template #end>
       <Button
