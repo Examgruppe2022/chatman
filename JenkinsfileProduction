@@ -5,7 +5,7 @@ pipeline {
             steps{
                 script{
                     try{
-                        sh "docker-compose --env-file ./config/Test.env down"
+                        sh "docker-compose --env-file ./config/Prod.env down"
                     }
                     finally {}
                 }
@@ -13,7 +13,8 @@ pipeline {
         }
         stage('Production deployment') {
             steps {
-                sh"docker-compose --env-file ./config/Test.env up -d"
+                sh"docker-compose --env-file ./config/Prod.env pull"
+                sh"docker-compose --env-file ./config/Prod.env up -d"
             }
         }
     }
