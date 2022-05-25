@@ -18,6 +18,8 @@ import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css";
 import {jwtInterceptor} from "./helpers/jwt-interceptor";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
 const app = createApp(App);
 jwtInterceptor();
 app.use(PrimeVue);
