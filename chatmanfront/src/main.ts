@@ -19,6 +19,11 @@ import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css";
 
 
+import {jwtInterceptor} from "./helpers/jwt-interceptor";
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
+
+
 const app = createApp(App);
 app.use(PrimeVue);
 app.use(createPinia());
