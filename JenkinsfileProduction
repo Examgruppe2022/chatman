@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+      run filter: 'SUCCESSFUL', name: 'PRODUCTION_BUILD', projectName: 'Chatman2022'
+    }
     stages {
         stage('reset containers') {
             steps{
