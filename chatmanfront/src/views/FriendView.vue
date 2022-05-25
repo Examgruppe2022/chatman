@@ -22,7 +22,7 @@
         <Button @click="searchFriend" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
          <br>
           <br>
-        <Button @click="friendRequest" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-user plus" label=" Send Friend Request"></Button>
+        <Button @click="sendFriendRequest" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-user plus" label=" Send Friend Request"></Button>
       </div>
     </div>
 </template>
@@ -30,15 +30,26 @@
 <script setup lang="ts">
 import { UserStore } from "@/stores/userStore";
 import { ref } from "vue";
+import { FriendRequestService } from "@/services/friendRequest.service";
 
 const userStore = UserStore();
 const search = ref("");
 const selectedFriends = ref();
+const confirmation = ref("");
+const friendRequestService: FriendRequestService = new FriendRequestService();
 
 function searchFriend() {
   userStore.findNonFriends(search.value);
 }
-function friendRequest(){
+function sendFriendRequest(){
+  confirmation.value = "Friend Request sent !";
+  friendRequestService.sendFriendRequest(
+    userStore.loggedInUser._id,
+    userStore.userName,
+    userStore.foundUser._id,
+    false
+  );
+
 }
 </script>
 <style scoped></style>

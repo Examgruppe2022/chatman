@@ -66,18 +66,5 @@ export class UserService {
     return res.data;
   }
 
-  async getFriendRequests(loggedinUser: string) {
-    const res = await http.post("/friend-requests/getRequests")
-    return res.data;
-  }
 
-
-  async acceptFriendRequest(receiver: string, sender: string) {
-    await http.post("/friend-requests/acceptRequest")
-  }
-
-  async sendFriendRequest(receiver: string, sender: string) {
-    await http.post("/friend-requests/sendRequest'")
-    return "sent"
-  }
 }
