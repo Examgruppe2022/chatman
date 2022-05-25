@@ -25,9 +25,11 @@
           <Button @click="refresh2" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-refresh" label="Refresh"></Button>
         </div>
       </div>
-        <div class="col-3 knapper">
-          <i class="pi pi-bell mr-4 p-text-secondary" style="font-size: 2rem" v-badge="2"></i> &nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="pi pi-envelope p-text-secondary" style="font-size: 2rem" v-badge.danger></i>&nbsp;&nbsp;
+        <div class="col-3">
+          <h5 class="w-75 mx-auto">Friend Request</h5>
+          <Listbox v-model="friendRequestList" :options="this.friendRequestStore.myFriendRequest" optionLabel="senderUsername" style="width:15rem; min-height:300px;" />
+          <br>
+          <Button @click="acceptFriend" class="p-button-raised p-button-secondary p-button-sm p-button-rounded" icon="pi pi-check" label="Accept Friend"></Button>
         </div>
     </div>
   </template>
@@ -35,9 +37,11 @@
 <script setup lang="ts" >
  import { UserStore } from "@/stores/userStore";
  import { RoomStore } from "@/stores/roomStore";
+ import { FriendRequestStore } from "@/stores/friendRequestStore";
 
  const userStore = UserStore();
  const roomStore = RoomStore();
+ const friendRequestStore = FriendRequestStore();
 
 
  function refresh(){
@@ -45,6 +49,9 @@
  }
  function refresh2(){
    roomStore.findMyRooms();
+ }
+ function acceptFriend(){
+
  }
 
 </script>

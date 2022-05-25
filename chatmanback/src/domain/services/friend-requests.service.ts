@@ -13,6 +13,7 @@ export class FriendRequestsService {
   ) {}
 
   async SendRequest(request: CreateFriendRequestDto) {
+    console.log(request);
     const alreadySent = await this.friendRequestModel.findOne({
       senderUsername: request.senderUsername,
       receiverUsername: request.receiverUsername,
@@ -31,6 +32,7 @@ export class FriendRequestsService {
         receiverUsername: request.receiverUsername,
         isAccepted: false,
       });
+      console.log(newRequest);
       return newRequest.save();
     }
   }

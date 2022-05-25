@@ -37,7 +37,10 @@ pipeline {
             steps{
                 dir("chatmanback"){
                     sh "npm install"
-                    //sh "npm test"
+                    sh "npm test"
+                }
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh "exit 1"
                 }
             }
             post {
