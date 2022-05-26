@@ -47,7 +47,7 @@ const roomStore = RoomStore();
 const chatStore = ChatStore();
 const userStore = UserStore();
 const selectAccessibleRooms = ref();
-const roomChatRoomInput = ref("");
+const txtChatRoomInput = ref("");
 refresh();
 
 function refresh() {
@@ -59,7 +59,7 @@ async function connectToChatRoom() {
   //await router.push("/chat");
 }
 async function connect() {
-  await chatStore.setRoom(roomChatRoomInput.value);
+  await chatStore.setRoom(txtChatRoomInput.value);
 }
 </script>
 
