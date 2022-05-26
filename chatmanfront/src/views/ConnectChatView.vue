@@ -53,9 +53,9 @@ function refresh() {
   roomStore.getAccessibleRoom(userStore.userName);
 }
 async function connectToChatRoom() {
+  console.log(selectAccessibleRooms.value.roomName);
   await chatStore.setRoom(selectAccessibleRooms.value.roomName);
-  await router.push("/chat");
-  //window.location.href =('/chat')
+  //await router.push("/chat");
 }
 </script>
 
