@@ -26,12 +26,6 @@
       ></Button>
       <br />
       <br />
-      <InputText v-model="txtChatRoomInput" placeholder="Enter room name" />
-      <Button
-        class="p-button-rounded p-button-secondary p-button-raised"
-        @click="connect"
-        >backup connect</Button
-      >
     </div>
   </div>
 </template>
@@ -47,7 +41,6 @@ const roomStore = RoomStore();
 const chatStore = ChatStore();
 const userStore = UserStore();
 const selectAccessibleRooms = ref();
-const txtChatRoomInput = ref("");
 refresh();
 
 function refresh() {
@@ -56,10 +49,7 @@ function refresh() {
 async function connectToChatRoom() {
   console.log(selectAccessibleRooms.value.roomName);
   await chatStore.setRoom(selectAccessibleRooms.value.roomName);
-  //await router.push("/chat");
-}
-async function connect() {
-  await chatStore.setRoom(txtChatRoomInput.value);
+  await router.push("/chat");
 }
 </script>
 
