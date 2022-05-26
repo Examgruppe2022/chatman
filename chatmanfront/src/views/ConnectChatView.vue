@@ -19,19 +19,19 @@
     </div>
     <div class="col-2">
       <Button
-        @click="refresh"
-        class="p-button-raised p-button-secondary p-button-sm p-button-rounded"
-        icon="pi pi-refresh"
-        label="Refresh"
-      ></Button>
-      <br />
-      <br />
-      <Button
         @click="connectToChatRoom"
         class="p-button-raised p-button-secondary p-button-sm p-button-rounded"
-        icon="pi pi-check-circle"
-        label="Connect"
+        icon="pi pi-refresh"
+        label="connect"
       ></Button>
+      <br />
+      <br />
+      <InputText v-model="txtChatRoomInput" placeholder="Enter room name" />
+      <Button
+        class="p-button-rounded p-button-secondary p-button-raised"
+        @click="connect"
+        >backup connect</Button
+      >
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@ const roomStore = RoomStore();
 const chatStore = ChatStore();
 const userStore = UserStore();
 const selectAccessibleRooms = ref();
+const roomChatRoomInput = ref("");
 refresh();
 
 function refresh() {
@@ -56,6 +57,9 @@ async function connectToChatRoom() {
   console.log(selectAccessibleRooms.value.roomName);
   await chatStore.setRoom(selectAccessibleRooms.value.roomName);
   //await router.push("/chat");
+}
+async function connect() {
+  await chatStore.setRoom(roomChatRoomInput.value);
 }
 </script>
 

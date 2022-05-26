@@ -29,6 +29,7 @@ export class RoomService {
     const res = await http.post<Room[]>("/rooms/allAccessibleRooms", {
       text: username,
     });
+    console.log(res.data);
     return res.data;
   }
 }
