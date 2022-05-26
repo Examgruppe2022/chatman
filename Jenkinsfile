@@ -37,10 +37,8 @@ pipeline {
             steps{
                 dir("chatmanback"){
                     sh "npm install"
-                    //this is commented out becuase the always fail, due to not being able to connect to the database
-                    //sh "npm test"
+                    sh "npm test"
                 }
-
             }
             post {
                 success{
