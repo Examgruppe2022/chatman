@@ -59,7 +59,7 @@ export class RoomsService implements IRoomsService {
     const user = await this.userModel.findOne({ username: username });
     const friendsRoomsReturn: RoomEntity[] = [];
     for (const friend of user.friends) {
-      const friendsRooms = await this.roomModel.find({ roomCreator: username });
+      const friendsRooms = await this.roomModel.find({ roomCreator: friend });
       friendsRooms.forEach(function (room) {
         friendsRoomsReturn.push(room);
       });
