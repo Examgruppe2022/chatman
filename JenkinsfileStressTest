@@ -7,7 +7,7 @@ pipeline {
         stage("Stress testing the API") {
             steps{
                 dir("performanceTests") {
-                    sh"k6 run -e URL=185.51.76.42:8091 performanceTests/stressTest.js"
+                    sh"k6 run -e URL=185.51.76.42:8091 stressTest.js"
                 }
             }
         }

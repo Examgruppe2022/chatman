@@ -15,7 +15,6 @@ pipeline {
             }
         }
         stage('Production deployment') {
-        //for some reason it tries to start multiple mongodb, however the server can only support one such service, so it crashes
             steps {
                 sh"docker-compose --env-file ./config/Prod.env pull"
                 sh"docker-compose --env-file ./config/Prod.env up -d"
